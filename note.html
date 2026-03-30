@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>v2.4.0 — New Disclosure Engine — UHM Release Notes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .version-history {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .version-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .version-item:last-child { border-bottom: none; }
+    .version-num {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      background: #f1f4f8;
+      color: var(--navy);
+      padding: 1px 7px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      font-weight: 600;
+    }
+    .version-item-info { flex: 1; }
+    .version-item-action { font-size: 12px; color: var(--text-mid); }
+    .version-item-time { font-size: 11.5px; color: var(--text-light); margin-top: 2px; }
+    .chevron-open .chevron svg { transform: rotate(180deg); }
+    .process-step {
+      display: flex;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .process-step:last-child { border-bottom: none; }
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-title { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .step-desc { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+    .note-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .note-tag.feature, .note-tag.compliance, .note-tag.disclosures { background: var(--border); color: var(--text-mid); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;">
+      <div class="nav-logo-mark">UHM</div>
+      <div class="nav-logo-text">
+        <span class="nav-brand">Union Home Mortgage</span>
+        <span class="nav-subtitle">Release Note Library</span>
+      </div>
+    </a>
+    <div class="nav-divider"></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Applications</a>
+      <a href="#" class="nav-link">Browse All Notes</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-menu">
+        <div class="user-chip" onclick="toggleUserMenu(event)">
+          <div class="user-avatar">JE</div>
+          <div class="user-info">
+            <div class="user-name">John Editor</div>
+            <div class="user-role">Editor</div>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="user-dropdown-name">John Editor</div>
+            <div class="user-dropdown-email">j.editor@uhm.com</div>
+            <span class="user-dropdown-role-pill">Example Access</span>
+          </div>
+          <div class="user-dropdown-items">
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              My Release Notes
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Settings
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item danger" onclick="alert('Signed out')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Applications</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="app.html">Loan Origination System</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>v2.4.0 — New Disclosure Engine</span>
+</div>
+
+<div class="page-wrap" style="padding-top:16px;">
+  <div class="two-col">
+
+    <!-- MAIN COLUMN -->
+    <div>
+
+      <!-- NOTE HEADER -->
+      <div class="note-header-card">
+        <div class="note-title-row">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
+              <span class="tc-version" style="font-size:14px; padding: 3px 12px;">v2.4.0</span>
+              <span class="note-tag feature">Feature</span>
+              <span class="note-tag compliance">Compliance</span>
+              <span class="note-tag disclosures">Disclosures</span>
+            </div>
+            <div class="note-title">New Disclosure Engine — Rate &amp; Fee Calculation Overhaul</div>
+          </div>
+          <div class="note-actions">
+            <button class="btn btn-outline">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download .docx
+            </button>
+            <button class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Edit Note
+            </button>
+          </div>
+        </div>
+        <div class="note-meta-grid">
+          <div class="meta-cell">
+            <div class="meta-label">Application</div>
+            <div class="meta-value">Loan Origination System</div>
+          </div>
+          <div class="meta-cell">
+            <div class="meta-label">Patch Number</div>
+            <div class="meta-value mono">v2.4.0</div>
+          </div>
+          <div class="meta-cell">
+            <div class="meta-label">Author</div>
+            <div class="meta-value">Robin Crane</div>
+          </div>
+          <div class="meta-cell">
+            <div class="meta-label">Date Went Live</div>
+            <div class="meta-value">Feb 28, 2026</div>
+          </div>
+          <div class="meta-cell">
+            <div class="meta-label">Last Modified</div>
+            <div class="meta-value">Mar 2, 2026</div>
+          </div>
+          <div class="meta-cell">
+            <div class="meta-label">Modified By</div>
+            <div class="meta-value">John Editor</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JOB OVERVIEW -->
+      <div class="content-card">
+        <div class="content-card-header" onclick="toggleCard(this)">
+          <div class="content-card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Job Overview
+          </div>
+          <span class="chevron chevron-open">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="content-card-body" id="body-overview">
+          <p>This release delivers a complete overhaul of the disclosure fee calculation engine within the Loan Origination System. The previous implementation had accumulated technical debt over three major versions and could not accommodate variable-rate ARM products or complex lender credit structures.</p>
+          <p>The new engine introduces a modular calculation pipeline that separates rate-dependent fees from static fees, enabling accurate disclosure generation across all currently offered UHM loan products including conventional, FHA, VA, and USDA programs.</p>
+          <p><strong>Business Impact:</strong> Disclosure accuracy improved from an estimated 91% to 99.6% across test scenarios. Regulatory compliance with TRID timing requirements is now enforced at the system level, reducing manual reviewer workload.</p>
+        </div>
+      </div>
+
+      <!-- LOGIC / PROCESS -->
+      <div class="content-card">
+        <div class="content-card-header" onclick="toggleCard(this)">
+          <div class="content-card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Logic &amp; Process
+          </div>
+          <span class="chevron chevron-open">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="content-card-body" id="body-logic">
+          <p>The disclosure engine processes each loan through the following calculation pipeline:</p>
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-title">Product Type Resolution</div>
+              <div class="step-desc">System identifies loan product (Conventional, FHA, VA, USDA, ARM) and loads the corresponding fee schedule and regulatory thresholds.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-title">Rate-Dependent Fee Calculation</div>
+              <div class="step-desc">Variable fees (origination, discount points) are calculated against the current locked or floating rate. ARM products calculate against initial rate and each subsequent cap adjustment.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-title">Lender Credit Application</div>
+              <div class="step-desc">If a lender credit is present, it is applied to reduce itemized fees in priority order per CFPB guidance, never reducing fees below zero.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">4</div>
+            <div>
+              <div class="step-title">APR &amp; Finance Charge Computation</div>
+              <div class="step-desc">Annual Percentage Rate and total finance charges are computed from the net fee schedule. Values are flagged if they exceed HOEPA thresholds.</div>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">5</div>
+            <div>
+              <div class="step-title">Disclosure Document Generation</div>
+              <div class="step-desc">Loan Estimate or Closing Disclosure is generated and timestamped. TRID 3-day and 7-day waiting period timers are initialized automatically.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILE ATTACHMENT -->
+      <div class="content-card">
+        <div class="content-card-header" onclick="toggleCard(this)">
+          <div class="content-card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            Attached Document
+          </div>
+          <span class="chevron chevron-open">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="content-card-body" id="body-file">
+          <div class="file-attachment">
+            <div class="file-info">
+              <div class="file-icon">DOCX</div>
+              <div>
+                <div class="file-name">LOS_v2.4.0_Disclosure_Engine_Release_Notes.docx</div>
+                <div class="file-size">248 KB · Uploaded Feb 28, 2026 by Robin Crane</div>
+              </div>
+            </div>
+            <button class="btn btn-outline" style="font-size: 12.5px; padding: 8px 14px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIT TRAIL -->
+      <div class="content-card">
+        <div class="content-card-header" onclick="toggleCard(this)">
+          <div class="content-card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Audit Trail
+          </div>
+          <span class="chevron chevron-open">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div class="content-card-body" id="body-audit">
+          <ul class="audit-trail">
+            <li class="audit-entry">
+              <div class="audit-avatar">JE</div>
+              <div class="audit-main">
+                <div class="audit-text"><strong>John Editor</strong> updated the <span class="audit-action">Logic &amp; Process</span> section — clarified HOEPA threshold language.</div>
+                <div class="audit-time">Mar 2, 2026 at 11:14 AM</div>
+              </div>
+            </li>
+            <li class="audit-entry">
+              <div class="audit-avatar" style="background:#4a6fa5;">RC</div>
+              <div class="audit-main">
+                <div class="audit-text"><strong>Robin Crane</strong> <span class="audit-action">uploaded</span> the original release note document.</div>
+                <div class="audit-time">Feb 28, 2026 at 3:42 PM</div>
+              </div>
+            </li>
+            <li class="audit-entry">
+              <div class="audit-avatar" style="background:#4a6fa5;">RC</div>
+              <div class="audit-main">
+                <div class="audit-text"><strong>Robin Crane</strong> <span class="audit-action">created</span> release note <strong>v2.4.0</strong> and submitted for review.</div>
+                <div class="audit-time">Feb 27, 2026 at 4:55 PM</div>
+              </div>
+            </li>
+            <li class="audit-entry">
+              <div class="audit-avatar" style="background:#5c6b7a;">WH</div>
+              <div class="audit-main">
+                <div class="audit-text"><strong>Wren Heron</strong> <span class="audit-action">approved</span> release note for publication via HALO change request #CR-20260228.</div>
+                <div class="audit-time">Feb 28, 2026 at 9:08 AM</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+
+      <!-- VERSION HISTORY -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          Version History
+        </div>
+        <ul class="version-history">
+          <li class="version-item">
+            <span class="version-num">v2.4.1</span>
+            <div class="version-item-info">
+              <div class="version-item-action">Pipeline Stage Fix</div>
+              <div class="version-item-time">Mar 15, 2026 · J. Editor</div>
+            </div>
+          </li>
+          <li class="version-item" style="margin: 0 -20px; padding: 10px 20px; border-radius:0;">
+            <span class="version-num">v2.4.0</span>
+            <div class="version-item-info">
+              <div class="version-item-action" style="font-weight:600; color:var(--text);">New Disclosure Engine <span style="font-size:11px; color:var(--text-light); font-weight:600;">← Current</span></div>
+              <div class="version-item-time">Feb 28, 2026 · R. Crane</div>
+            </div>
+          </li>
+          <li class="version-item">
+            <span class="version-num">v2.3.2</span>
+            <div class="version-item-info">
+              <div class="version-item-action">Rate Lock Enhancement</div>
+              <div class="version-item-time">Jan 10, 2026 · M. Swift</div>
+            </div>
+          </li>
+          <li class="version-item">
+            <span class="version-num">v2.3.1</span>
+            <div class="version-item-info">
+              <div class="version-item-action">URLA Form Update</div>
+              <div class="version-item-time">Nov 22, 2025 · R. Crane</div>
+            </div>
+          </li>
+          <li class="version-item">
+            <span class="version-num">v2.3.0</span>
+            <div class="version-item-info">
+              <div class="version-item-action">Automated Conditions</div>
+              <div class="version-item-time">Sep 5, 2025 · J. Editor</div>
+            </div>
+          </li>
+        </ul>
+        <a href="app.html" class="section-link" style="display:block; text-align:center; margin-top:12px; font-size:12.5px;">
+          View all 18 versions →
+        </a>
+      </div>
+
+      <!-- ROLE ACCESS -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Your Access
+        </div>
+        <div style="background: var(--border); border-radius: var(--radius-sm); padding: 12px 14px; display:flex; align-items:center; gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-mid)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div>
+            <div style="font-size:13px; font-weight:600; color:var(--text);">Example Access</div>
+            <div style="font-size:12px; color:var(--text-mid);">You can view, edit, and upload notes for this application.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RELATED APPS -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          Related Applications
+        </div>
+        <a href="app.html" style="display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--border); text-decoration:none;">
+          <div>
+            <div style="font-size:13px; font-weight:600; color:var(--navy);">Document Management System</div>
+            <div style="font-size:11.5px; color:var(--text-light);">Updated 2 weeks ago</div>
+          </div>
+        </a>
+        <a href="app.html" style="display:flex; align-items:center; gap:10px; padding:9px 0; text-decoration:none;">
+          <div>
+            <div style="font-size:13px; font-weight:600; color:var(--navy);">Azure DevOps Bridge</div>
+            <div style="font-size:11.5px; color:var(--text-light);">Updated 5 days ago</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function toggleCard(header) {
+    const chevron = header.querySelector('.chevron');
+    const bodyId = 'body-' + header.parentElement.querySelector('[id^="body-"]').id.replace('body-', '');
+    const body = document.getElementById('body-' + bodyId.replace('body-',''));
+
+    // Find sibling body
+    const siblings = header.parentElement.children;
+    let bodyEl = null;
+    for (let el of siblings) {
+      if (el.id && el.id.startsWith('body-')) { bodyEl = el; break; }
+    }
+    if (!bodyEl) return;
+
+    const isOpen = chevron.classList.contains('chevron-open');
+    if (isOpen) {
+      bodyEl.style.display = 'none';
+      chevron.classList.remove('chevron-open');
+    } else {
+      bodyEl.style.display = 'block';
+      chevron.classList.add('chevron-open');
+    }
+  }
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

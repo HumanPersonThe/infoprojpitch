@@ -1,0 +1,201 @@
+﻿Notes from UHM
+-Jason
+Building front and back end
+70% are out of date or can’t be found
+Expected to work with docs or similar applications
+Manual input not an api or automated system
+Any change should be updated 
+One living source of truth
+2-3 of dev + 2 weeks of testing. 10 weeks or so is their estimate.
+Logs kept until the app ends use.
+Must find funding for class
+No new accounts need to be made
+Nothing like drive
+All of UHM only
+No existing tools to be used as a reference or point of comparison 
+Connected to azure dev ops if posible 
+Connected to app dashboard 
+No budget 
+Dev time for hour is average cle dev sal
+Main contact - John Blake
+jblake@uhm.com
+440-341-4720
+Side contact - Christion Pedersen
+        cpedersen@uhm.com
+John’s favorite bird - bald eagle 
+Christian’s favorite bird - toucan 
+Any time a meaningful change happens there should be an updated and tracks who made the change
+If applications not updated in a set time send an alert to notify
+Dev team 1-2, 1 ba, 1 tester, 1 PM
+File upload 
+Main page is general functionality and app process with general view only being the newest push
+
+
+
+
+Need to haves
+Some visual of flow in the app
+Different users and access points 
+Editing and version control 
+Cost time annalises 
+MVP
+Wire frame would be awesome
+
+
+
+
+-Jenna's notes
+* Notes aren't up to date, logic isn't documented, custom front-end, integrated back-end with questionable db
+* DB isn’t documented (well), and there is no current consistent change management
+* Data types stores aren’t complex. No tables, mostly paragraphs/bullets (text files)
+* Manual data entry, OneDrive
+* 2-3 weeks of dev, 2 weeks of qa, plus a couple of weeks for recon, no deadline ~8-10 weeks
+* Indefinite data storage (as long as people use the app) 
+* Funding is something we’ll need, but no budget? Give a cost analysis est.
+* Ease of use is a priority (autocomplete on search boxes, related results, etc.)
+* Release update notes should be tiered within the structure of the original release
+* Microsoft auth for SSO
+* Microsoft Azure DevOps APL integration
+* + Employee App Dash Screen (Jira) Indicator on different Jira Widgets notifying new release? Like in-app integration, it seems?
+* HALO ITSM
+* Change management policy is essentially just a copy of release notes, which doesn’t seem very specific or regulated. Potentially an automated review process for new release notes
+* offshore dev consideration
+* Mostly cloud environments
+* CRUD Action-based logging
+* Dev team of 1-2 at a time (additionally, a BA, a project manager, and a tester)
+* 1 hr development = googled est. for Cleveland, Ohio
+* Microsoft Entra is used for role access (managed by the service desk team, not devs)
+* BA team cleans data & manages backend
+* Figma UI wireframe? MVP vs. additional feature breakdown, I can do this :^)
+* Cost-time analysis, based on Google research
+* File upload for release note pushes (Word docs)
+* Release note patches just update the whole file, no layering logic (date modified, author, title of project, date originally went live), pop-up audit trail?
+* jblake@uhm.com (440) 341 4720
+
+________________
+~ Evans notes
+INPUT MANUALLY
+Rolling incremental release notes (Living documents)
+Timeframe is around a few weeks of dev time (effort hours not duration) / 8-10 weeks total
+Autofill required for UX
+Internal microsoft account RBAC
++Add role based access compared to current drive storage rules, I.E. IT support need to be able to access
+Should add integration with Microsoft Azure DevOps
++Add an app dashboard tile for Jira
++app dashboard integration
+Likely all microsoft azure tools
+Google an estimate for Hourly rate
++timeframe update notifications 
+Halo ITSM
+Standardization policy for changes
+Basic SQL sanitization to prevent injection
+Live logic needed, not necessary for archived release version logics 
+
+
+Uhm colors / webportal
+
+
+
+
+Release note example
+        Title (patch num)
+        Authorship 
+        Job overview / outline 
+        Logic / process
+        
+        Word doc .docx
+        Couple pages
+
+
+—-staff
+1 Sr dev
+1 jr dev
+1 BA
+1 tester
+1 Project manager
+
+
+—-Contact info
+John Blake
+jblake@uhm.com
+440-341-4720
+Christian Pedersen
+cpedersen@uhm.com
+
+
+
+~Daira Martinez's notes
+different release note?
+we would want that update, one living each
+
+
+
+
+when do you want to complete the project?
+development time, simple form type, edit: 2-3 weeks of development + testing time (maybe additional 2 weeks), + other things  total= 8-10 weeks 
+
+
+how long should data be kept
+indifferently, or until as long as the app is use by people
+
+
+secure funding?
+yes
+
+
+desire user experience
+i want to be able to go to a website and type in project and review different application and pull information
+easy as i can, people don't always know the name
+its own application
+someone being able to upload and change
+update release note of change
+support team involve
+business themselves involve
+
+
+would you use the same role?
+expand it to be IT support to have, open up to all UHM but with the edit privilege
+
+
+business partner outside of UHM that will use it
+Offshore
+
+
+budget for this?
+no budget
+
+
+what tech resources to use?
+built and store in the cloud, extent whatever we have now, a lot of it is cloud-based, testers, ba, project managers
+
+
+consistent place or portal where you are releasing things at?
+halo ITSM: upload, the developer will provide the info of updates, release, 
+essentially copied of those notes and get sent to the system, if we submit a change through the manager system software, sent it to the release app, and someone will review it once given the green light, its good
+
+
+how many people in the development team
+one more senior developer
+optionally a junior helping them
+one BA and project manager
+one tester
+
+
+who is responsible for handling and maintenance?
+business analysts team
+
+
+end goal?
+love to see basically actual something physical to see, steps from start to finish, all the different users and access involved, understand the editing, cost and time analysis
+
+
+should visual match the uhm?
+wow us, something easy to understand, nothing crazy, easy on the eye, simple wire framer, sketch
+
+
+for changes made to release note, should it go underneath it
+date modified, note themselves, date it went live, revision date
+
+
+does authorship matter?
+yes it does

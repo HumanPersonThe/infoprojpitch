@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search — UHM Release Note Library</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .search-page-bar {
+      background: var(--navy);
+      padding: 20px 0;
+    }
+    .search-page-bar-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .search-page-bar .search-bar {
+      margin: 0;
+      box-shadow: var(--shadow-md);
+    }
+    .results-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .results-count {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .results-query {
+      color: var(--navy);
+    }
+    .results-sub {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+    .results-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-light);
+      margin: 28px 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      text-decoration: none;
+      transition: all 0.15s;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+    .result-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #bcd0e8;
+    }
+    .result-type-pill {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--border);
+      color: var(--text-mid);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .result-type-pill.app { background: var(--navy); color: #fff; }
+    .result-body { flex: 1; min-width: 0; }
+    .result-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .result-title mark {
+      background: var(--gold-bg);
+      color: var(--navy);
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+    .result-meta {
+      font-size: 12.5px;
+      color: var(--text-light);
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .result-snippet {
+      font-size: 13.5px;
+      color: var(--text-mid);
+      line-height: 1.55;
+    }
+    .result-snippet mark {
+      background: var(--gold-bg);
+      color: var(--navy);
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+    .result-version {
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      background: #f1f4f8;
+      color: var(--navy);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .result-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .no-results {
+      text-align: center;
+      padding: 64px 24px;
+    }
+    .no-results svg {
+      color: var(--border);
+      margin-bottom: 16px;
+    }
+    .no-results-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .no-results-sub {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+    .result-arrow {
+      color: var(--text-light);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;">
+      <div class="nav-logo-mark">UHM</div>
+      <div class="nav-logo-text">
+        <span class="nav-brand">Union Home Mortgage</span>
+        <span class="nav-subtitle">Release Note Library</span>
+      </div>
+    </a>
+    <div class="nav-divider"></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Applications</a>
+      <a href="applications.html" class="nav-link">Browse All Notes</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-menu">
+        <div class="user-chip" onclick="toggleUserMenu(event)">
+          <div class="user-avatar">JE</div>
+          <div class="user-info">
+            <div class="user-name">John Editor</div>
+            <div class="user-role">Editor</div>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="user-dropdown-name">John Editor</div>
+            <div class="user-dropdown-email">j.editor@uhm.com</div>
+            <span class="user-dropdown-role-pill">Example Access</span>
+          </div>
+          <div class="user-dropdown-items">
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              My Release Notes
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Settings
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item danger" onclick="alert('Signed out')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- SEARCH BAR -->
+<div class="search-page-bar">
+  <div class="search-page-bar-inner">
+    <form class="search-bar" onsubmit="return runSearch()">
+      <span class="search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </span>
+      <input type="text" id="searchInput" placeholder="Search applications, patch numbers, keywords…" autocomplete="off" />
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="page-wrap" style="max-width:900px; padding-top:28px;">
+
+  <div id="results-header" class="results-header">
+    <span class="results-count" id="count-label"></span>
+    <span class="results-sub" id="sub-label"></span>
+  </div>
+
+  <div id="results-container"></div>
+
+</div>
+
+<script>
+// ── Data ────────────────────────────────────────────────────────────────────
+const APPS = [
+  { type: 'app', title: 'Loan Origination System', category: 'Lending', notes: 18, updated: 'Mar 15, 2026', owner: 'J. Editor', desc: 'End-to-end mortgage origination pipeline management. Handles applications, disclosures, and loan staging.', href: 'app.html' },
+  { type: 'app', title: 'Underwriting Dashboard', category: 'Lending', notes: 22, updated: '8 months ago', owner: 'D. Sparrow', desc: 'Risk scoring, automated underwriting decision support, and loan condition tracking for the UW team.', href: 'app.html' },
+  { type: 'app', title: 'Employee Portal', category: 'HR & Operations', notes: 11, updated: '1 week ago', owner: 'R. Crane', desc: 'Internal self-service portal for HR, benefits, time tracking, and company announcements.', href: 'app.html' },
+  { type: 'app', title: 'HALO ITSM Connector', category: 'IT & Infrastructure', notes: 7, updated: '3 months ago', owner: 'M. Swift', desc: 'Service management integration layer connecting UHM change requests to the HALO ticketing system.', href: 'app.html' },
+  { type: 'app', title: 'Azure DevOps Bridge', category: 'IT & Infrastructure', notes: 9, updated: '5 days ago', owner: 'R. Finch', desc: 'Synchronizes UHM sprint boards, pipelines, and deployment triggers with internal release workflows.', href: 'app.html' },
+  { type: 'app', title: 'Document Management System', category: 'IT & Infrastructure', notes: 14, updated: '2 weeks ago', owner: 'L. Wren', desc: 'Centralized storage and retrieval for mortgage documents, compliance files, and borrower records.', href: 'app.html' },
+];
+
+const NOTES = [
+  { type: 'note', title: 'Pipeline Stage Fix — Conditional Approval Routing', app: 'Loan Origination System', version: 'v2.4.1', date: 'Mar 15, 2026', author: 'John Editor', tags: ['Bug Fix', 'Routing'], desc: 'Resolved an issue where loans in conditional approval status were incorrectly routed back to the initial underwriting queue instead of advancing to the clear-to-close stage.', href: 'note.html' },
+  { type: 'note', title: 'New Disclosure Engine — Rate & Fee Calculation Overhaul', app: 'Loan Origination System', version: 'v2.4.0', date: 'Feb 28, 2026', author: 'Robin Crane', tags: ['Feature', 'Compliance', 'Disclosures'], desc: 'Complete rewrite of the fee calculation module to support variable-rate disclosure scenarios, including ARM cap calculations and lender credit offsets.', href: 'note.html' },
+  { type: 'note', title: 'Rate Lock Enhancement — Extended Lock Period Support', app: 'Loan Origination System', version: 'v2.3.2', date: 'Jan 10, 2026', author: 'Martin Swift', tags: ['Enhancement', 'Rate Lock'], desc: 'Added support for 60- and 90-day rate lock periods. UI updated to display lock expiration warnings 7 days prior to expiry.', href: 'note.html' },
+  { type: 'note', title: 'URLA Form Integration — 2025 CFPB Updates', app: 'Loan Origination System', version: 'v2.3.1', date: 'Nov 22, 2025', author: 'Robin Crane', tags: ['Compliance', 'Regulatory'], desc: 'Updated the Uniform Residential Loan Application form fields to align with the latest CFPB regulatory requirements effective Q4 2025.', href: 'note.html' },
+  { type: 'note', title: 'Automated Conditions Checklist & Task Assignment', app: 'Loan Origination System', version: 'v2.3.0', date: 'Sep 5, 2025', author: 'John Editor', tags: ['Feature', 'Automation'], desc: 'New conditions engine automatically generates a checklist on loan creation based on product type, borrower profile, and property data.', href: 'note.html' },
+  { type: 'note', title: 'Deployment Pipeline Webhook Reliability Fix', app: 'Azure DevOps Bridge', version: 'v1.3.2', date: 'Mar 12, 2026', author: 'Robin Finch', tags: ['Bug Fix', 'CI/CD'], desc: 'Fixed intermittent webhook timeout failures caused by missing retry logic on deployment trigger events.', href: 'note.html' },
+  { type: 'note', title: 'Benefits Enrollment UI Refresh & Accessibility Update', app: 'Employee Portal', version: 'v3.1.0', date: 'Mar 9, 2026', author: 'Robin Crane', tags: ['Enhancement', 'Accessibility'], desc: 'Redesigned the benefits enrollment flow with improved WCAG 2.1 compliance, keyboard navigation, and screen reader support.', href: 'note.html' },
+  { type: 'note', title: 'Auth Token Refresh Bug — Temporary Patch', app: 'HALO ITSM Connector', version: 'v2.0.4', date: 'Dec 18, 2025', author: 'Martin Swift', tags: ['Bug Fix', 'Auth'], desc: 'Patched token expiry handling that caused session drops after 60 minutes. Full fix pending HALO API update.', href: 'note.html' },
+  { type: 'note', title: 'Bulk Export Feature & PDF Compression Engine', app: 'Document Management System', version: 'v4.2.1', date: 'Mar 3, 2026', author: 'Lark Wren', tags: ['Feature', 'Performance'], desc: 'Users can now bulk-export up to 500 documents as a ZIP archive. Added server-side PDF compression reducing average file size by 62%.', href: 'note.html' },
+  { type: 'note', title: 'Risk Score Model Update — DTI Threshold Adjustment', app: 'Underwriting Dashboard', version: 'v5.1.0', date: 'Jul 14, 2025', author: 'Dove Sparrow', tags: ['Compliance', 'Risk'], desc: 'Updated DTI thresholds in the automated risk model to reflect revised Fannie Mae guidelines effective August 2025.', href: 'note.html' },
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function highlight(text, q) {
+  if (!q) return escHtml(text);
+  const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  return escHtml(text).replace(re, '<mark>$1</mark>');
+}
+
+function escHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function matches(item, q) {
+  const haystack = [item.title, item.desc, item.type === 'note' ? item.app : item.category, item.type === 'note' ? item.version : '', ...(item.tags || [])].join(' ').toLowerCase();
+  return q.toLowerCase().split(/\s+/).every(w => haystack.includes(w));
+}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+function renderApp(item, q) {
+  return `
+    <a href="${item.href}" class="result-card">
+      <span class="result-type-pill app">App</span>
+      <div class="result-body">
+        <div class="result-title">${highlight(item.title, q)}</div>
+        <div class="result-meta">
+          <span>${escHtml(item.category)}</span>
+          <span>${item.notes} release notes</span>
+          <span>Updated ${escHtml(item.updated)}</span>
+          <span>Owner: ${escHtml(item.owner)}</span>
+        </div>
+        <div class="result-snippet">${highlight(item.desc, q)}</div>
+      </div>
+      <svg class="result-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
+    </a>`;
+}
+
+function renderNote(item, q) {
+  const tagsHtml = item.tags.map(t => `<span class="tag">${escHtml(t)}</span>`).join('');
+  return `
+    <a href="${item.href}" class="result-card">
+      <span class="result-type-pill">Note</span>
+      <div class="result-body">
+        <div class="result-title">${highlight(item.title, q)}</div>
+        <div class="result-meta">
+          <span>${escHtml(item.app)}</span>
+          <span class="result-version">${escHtml(item.version)}</span>
+          <span>${escHtml(item.date)}</span>
+          <span>${escHtml(item.author)}</span>
+        </div>
+        <div class="result-snippet">${highlight(item.desc, q)}</div>
+        <div class="result-tags">${tagsHtml}</div>
+      </div>
+      <svg class="result-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
+    </a>`;
+}
+
+function runSearch() {
+  const input = document.getElementById('searchInput');
+  const q = input.value.trim();
+  if (!q) return false;
+  const url = new URL(window.location);
+  url.searchParams.set('q', q);
+  window.history.pushState({}, '', url);
+  doRender(q);
+  return false;
+}
+
+function doRender(q) {
+  const all = [...APPS, ...NOTES];
+  const hits = all.filter(item => matches(item, q));
+  const apps = hits.filter(i => i.type === 'app');
+  const notes = hits.filter(i => i.type === 'note');
+
+  document.getElementById('searchInput').value = q;
+  document.title = `"${q}" — Search — UHM`;
+
+  const countEl = document.getElementById('count-label');
+  const subEl = document.getElementById('sub-label');
+  const container = document.getElementById('results-container');
+
+  countEl.innerHTML = `<span class="results-query">${hits.length} result${hits.length !== 1 ? 's' : ''}</span> for &ldquo;${escHtml(q)}&rdquo;`;
+  subEl.textContent = hits.length ? `${apps.length} application${apps.length !== 1 ? 's' : ''}, ${notes.length} release note${notes.length !== 1 ? 's' : ''}` : '';
+
+  if (hits.length === 0) {
+    container.innerHTML = `
+      <div class="no-results">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <div class="no-results-title">No results found</div>
+        <div class="no-results-sub">Try different keywords or browse all applications.</div>
+      </div>`;
+    return;
+  }
+
+  let html = '';
+  if (apps.length) {
+    html += `<div class="results-section-label">Applications</div>`;
+    html += apps.map(i => renderApp(i, q)).join('');
+  }
+  if (notes.length) {
+    html += `<div class="results-section-label">Release Notes</div>`;
+    html += notes.map(i => renderNote(i, q)).join('');
+  }
+  container.innerHTML = html;
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const q = params.get('q') || '';
+if (q) {
+  doRender(q);
+} else {
+  document.getElementById('count-label').textContent = 'Enter a search term above.';
+}
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

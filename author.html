@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Release Note — UHM Release Note Library</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .form-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .form-card-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .form-card-header svg {
+      width: 16px; height: 16px;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .form-card-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .form-card-body {
+      padding: 22px 24px;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field:last-child { margin-bottom: 0; }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.1px;
+    }
+
+    label span.req {
+      color: var(--red);
+      margin-left: 2px;
+    }
+
+    label span.opt {
+      font-weight: 400;
+      color: var(--text-light);
+      margin-left: 4px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+      appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(0, 48, 87, 0.08);
+    }
+
+    input::placeholder,
+    textarea::placeholder { color: var(--text-light); }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.65;
+      min-height: 110px;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238898AA' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .field-hint {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+
+    /* ── RICH TEXT TOOLBAR ── */
+    .rte-wrap {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .rte-wrap:focus-within {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(0, 48, 87, 0.08);
+    }
+
+    .rte-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 6px 8px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .rte-btn {
+      width: 28px; height: 28px;
+      border: none;
+      background: transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-mid);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.12s;
+    }
+
+    .rte-btn:hover { background: var(--border); color: var(--text); }
+    .rte-btn svg { width: 14px; height: 14px; }
+
+    .rte-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+
+    .rte-area {
+      min-height: 140px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      outline: none;
+      background: var(--white);
+    }
+
+    .rte-area:empty::before {
+      content: attr(data-placeholder);
+      color: var(--text-light);
+      pointer-events: none;
+    }
+
+    /* ── FILE UPLOAD ── */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: #fafbfc;
+      position: relative;
+    }
+
+    .upload-zone:hover, .upload-zone.drag-over {
+      border-color: var(--navy);
+      background: #f0f5fb;
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      width: 40px; height: 40px;
+      background: #e8f0fb;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: var(--navy);
+    }
+
+    .upload-icon svg { width: 20px; height: 20px; }
+
+    .upload-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .upload-sub {
+      font-size: 12.5px;
+      color: var(--text-light);
+    }
+
+    .upload-sub strong { color: var(--navy); }
+
+    .file-preview {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      margin-top: 10px;
+    }
+
+    .file-preview.visible { display: flex; }
+
+    .file-preview-icon {
+      width: 36px; height: 36px;
+      background: #2b579a;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .file-preview-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .file-preview-remove {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      display: flex;
+      transition: all 0.12s;
+    }
+
+    .file-preview-remove:hover { color: var(--red); background: var(--red-bg); }
+    .file-preview-remove svg { width: 15px; height: 15px; }
+
+    /* ── TAG INPUT ── */
+    .tag-input-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      min-height: 44px;
+      align-items: center;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      cursor: text;
+    }
+
+    .tag-input-wrap:focus-within {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(0, 48, 87, 0.08);
+    }
+
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #e8f0fb;
+      color: var(--navy);
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    .tag-chip button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--navy);
+      opacity: 0.5;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+    }
+
+    .tag-chip button:hover { opacity: 1; }
+
+    .tag-input {
+      border: none !important;
+      outline: none !important;
+      padding: 2px 4px !important;
+      font-size: 13.5px !important;
+      min-width: 80px;
+      flex: 1;
+      box-shadow: none !important;
+    }
+
+    /* ── FORM ACTIONS ── */
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 24px;
+      border-top: 1px solid var(--border);
+      background: #fafbfc;
+    }
+
+    .btn-lg {
+      padding: 11px 24px;
+      font-size: 14.5px;
+    }
+
+    .save-draft {
+      font-size: 13.5px;
+      color: var(--text-mid);
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s;
+    }
+
+    .save-draft:hover { background: var(--border); color: var(--text); }
+
+    .discard-btn {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .discard-btn:hover { color: var(--red); }
+
+    /* ── SIDEBAR ── */
+    .sidebar-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .checklist li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--text-mid);
+    }
+
+    .check-circle {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .check-circle.done {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .check-circle svg { width: 11px; height: 11px; }
+
+    .checklist li.done-item { color: var(--text); }
+
+    .workflow-step {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .workflow-step:last-child { border-bottom: none; }
+
+    .ws-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .ws-dot.active { background: var(--gold); }
+    .ws-dot.pending { background: var(--border); }
+    .ws-dot.done { background: var(--green); }
+
+    .ws-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .ws-sub { font-size: 12px; color: var(--text-light); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;">
+      <div class="nav-logo-mark">UHM</div>
+      <div class="nav-logo-text">
+        <span class="nav-brand">Union Home Mortgage</span>
+        <span class="nav-subtitle">Release Note Library</span>
+      </div>
+    </a>
+    <div class="nav-divider"></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Applications</a>
+      <a href="#" class="nav-link">Browse All Notes</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-menu">
+        <div class="user-chip" onclick="toggleUserMenu(event)">
+          <div class="user-avatar">JE</div>
+          <div class="user-info">
+            <div class="user-name">John Editor</div>
+            <div class="user-role">Editor</div>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="user-dropdown-name">John Editor</div>
+            <div class="user-dropdown-email">j.editor@uhm.com</div>
+            <span class="user-dropdown-role-pill">Example Access</span>
+          </div>
+          <div class="user-dropdown-items">
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              My Release Notes
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Settings
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item danger" onclick="alert('Signed out')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Applications</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="app.html">Loan Origination System</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>New Release Note</span>
+</div>
+
+<div class="page-wrap" style="padding-top: 16px;">
+  <div class="form-layout">
+
+    <!-- MAIN FORM COLUMN -->
+    <div>
+
+      <!-- IDENTIFICATION -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span class="form-card-title">Identification</span>
+        </div>
+        <div class="form-card-body">
+          <div class="field">
+            <label>Application <span class="req">*</span></label>
+            <select id="appSelect">
+              <option value="">Select an application…</option>
+              <option value="los" selected>Loan Origination System</option>
+              <option value="ep">Employee Portal</option>
+              <option value="halo">HALO ITSM Connector</option>
+              <option value="ado">Azure DevOps Bridge</option>
+              <option value="uw">Underwriting Dashboard</option>
+              <option value="dms">Document Management System</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Release Title <span class="req">*</span></label>
+              <input type="text" placeholder="e.g. New Disclosure Engine" id="titleInput" />
+            </div>
+            <div class="field">
+              <label>Patch / Version Number <span class="req">*</span></label>
+              <input type="text" placeholder="e.g. v2.5.0" id="versionInput" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Date Went Live <span class="req">*</span></label>
+              <input type="date" id="liveDateInput" />
+            </div>
+            <div class="field">
+              <label>Author <span class="req">*</span></label>
+              <input type="text" value="John Editor" id="authorInput" />
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label>Tags <span class="opt">(optional)</span></label>
+            <div class="tag-input-wrap" id="tagWrap" onclick="document.getElementById('tagInput').focus()">
+              <span class="tag-chip">Feature <button onclick="removeTag(this)" type="button">×</button></span>
+              <span class="tag-chip">Compliance <button onclick="removeTag(this)" type="button">×</button></span>
+              <input class="tag-input" type="text" id="tagInput" placeholder="Add tag…" />
+            </div>
+            <p class="field-hint">Press Enter to add a tag. Examples: Bug Fix, Enhancement, Compliance, Regulatory.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- JOB OVERVIEW -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span class="form-card-title">Job Overview</span>
+        </div>
+        <div class="form-card-body">
+          <div class="field" style="margin-bottom:0;">
+            <label>Summary <span class="req">*</span></label>
+            <div class="rte-wrap">
+              <div class="rte-toolbar">
+                <button class="rte-btn" onclick="fmt('bold')" title="Bold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg></button>
+                <button class="rte-btn" onclick="fmt('italic')" title="Italic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg></button>
+                <button class="rte-btn" onclick="fmt('underline')" title="Underline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/><line x1="4" y1="21" x2="20" y2="21"/></svg></button>
+                <div class="rte-sep"></div>
+                <button class="rte-btn" onclick="fmt('insertUnorderedList')" title="Bullet list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg></button>
+                <button class="rte-btn" onclick="fmt('insertOrderedList')" title="Numbered list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></button>
+              </div>
+              <div class="rte-area" contenteditable="true" id="overviewEditor"
+                data-placeholder="Summarize the purpose and business impact of this release…"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGIC & PROCESS -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span class="form-card-title">Logic &amp; Process</span>
+        </div>
+        <div class="form-card-body">
+          <div class="field" style="margin-bottom:0;">
+            <label>Technical detail, step-by-step process, or system logic changes <span class="opt">(optional)</span></label>
+            <div class="rte-wrap">
+              <div class="rte-toolbar">
+                <button class="rte-btn" onclick="fmt2('bold')" title="Bold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg></button>
+                <button class="rte-btn" onclick="fmt2('italic')" title="Italic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg></button>
+                <button class="rte-btn" onclick="fmt2('underline')" title="Underline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/><line x1="4" y1="21" x2="20" y2="21"/></svg></button>
+                <div class="rte-sep"></div>
+                <button class="rte-btn" onclick="fmt2('insertUnorderedList')" title="Bullet list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg></button>
+                <button class="rte-btn" onclick="fmt2('insertOrderedList')" title="Numbered list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></button>
+              </div>
+              <div class="rte-area" contenteditable="true" id="logicEditor"
+                data-placeholder="Describe the technical changes, process steps, or logic updates…"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILE UPLOAD -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          <span class="form-card-title">Attach Document</span>
+        </div>
+        <div class="form-card-body">
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" accept=".docx,.doc,.pdf" id="fileInput" onchange="handleFile(this)" />
+            <div class="upload-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="upload-label">Drop your file here, or <strong style="color:var(--navy);">browse</strong></div>
+            <div class="upload-sub">Accepts <strong>.docx</strong>, .doc, .pdf — max 25 MB</div>
+          </div>
+          <div class="file-preview" id="filePreview">
+            <div class="file-preview-icon">DOCX</div>
+            <span class="file-preview-name" id="filePreviewName">—</span>
+            <button class="file-preview-remove" onclick="clearFile()" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM ACTIONS -->
+      <div class="form-card" style="margin-bottom:0;">
+        <div class="form-actions">
+          <button class="btn btn-primary btn-lg" onclick="submitForm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Submit for Review
+          </button>
+          <button class="save-draft" onclick="saveDraft()">Save Draft</button>
+          <button class="discard-btn" onclick="if(confirm('Discard this note?')) window.location='app.html'">Discard</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+
+      <!-- COMPLETION CHECKLIST -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Completion
+        </div>
+        <ul class="checklist" id="checklist">
+          <li id="chk-app">
+            <span class="check-circle done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Application selected
+          </li>
+          <li id="chk-title">
+            <span class="check-circle"></span>
+            Release title entered
+          </li>
+          <li id="chk-version">
+            <span class="check-circle"></span>
+            Version number entered
+          </li>
+          <li id="chk-date">
+            <span class="check-circle"></span>
+            Date went live set
+          </li>
+          <li id="chk-overview">
+            <span class="check-circle"></span>
+            Job overview written
+          </li>
+        </ul>
+      </div>
+
+      <!-- REVIEW WORKFLOW -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Review Workflow
+        </div>
+        <div class="workflow-step">
+          <div class="ws-dot done"></div>
+          <div>
+            <div class="ws-label">Draft</div>
+            <div class="ws-sub">Author fills out this form</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="ws-dot active"></div>
+          <div>
+            <div class="ws-label" style="color:var(--navy);">Submit for Review</div>
+            <div class="ws-sub">Sent to BA team for approval</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="ws-dot pending"></div>
+          <div>
+            <div class="ws-label" style="color:var(--text-light);">Approved</div>
+            <div class="ws-sub">BA approves and publishes</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="ws-dot pending"></div>
+          <div>
+            <div class="ws-label" style="color:var(--text-light);">Published</div>
+            <div class="ws-sub">Visible to all UHM staff</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GUIDELINES -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Guidelines
+        </div>
+        <ul style="padding-left:16px; display:flex; flex-direction:column; gap:8px;">
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Use plain language — assume the reader isn't the developer who built it.</li>
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Include the date the change went live, not when it was written.</li>
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Attach the original Word doc if one exists — it becomes the source of record.</li>
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Logic changes should be documented even if nothing in the UI changed.</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ── RICH TEXT ── */
+  function fmt(cmd) {
+    document.getElementById('overviewEditor').focus();
+    document.execCommand(cmd, false, null);
+  }
+  function fmt2(cmd) {
+    document.getElementById('logicEditor').focus();
+    document.execCommand(cmd, false, null);
+  }
+
+  /* ── TAGS ── */
+  document.getElementById('tagInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = this.value.trim().replace(',', '');
+      if (!val) return;
+      const chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.innerHTML = `${val} <button onclick="removeTag(this)" type="button">×</button>`;
+      document.getElementById('tagWrap').insertBefore(chip, this);
+      this.value = '';
+    }
+    if (e.key === 'Backspace' && this.value === '') {
+      const chips = document.querySelectorAll('#tagWrap .tag-chip');
+      if (chips.length) chips[chips.length - 1].remove();
+    }
+  });
+
+  function removeTag(btn) { btn.parentElement.remove(); }
+
+  /* ── FILE UPLOAD ── */
+  function handleFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+    document.getElementById('filePreviewName').textContent = file.name;
+    document.getElementById('filePreview').classList.add('visible');
+    document.querySelector('.upload-zone .upload-label').textContent = 'File attached';
+  }
+
+  function clearFile() {
+    document.getElementById('fileInput').value = '';
+    document.getElementById('filePreview').classList.remove('visible');
+    document.querySelector('.upload-zone .upload-label').innerHTML = 'Drop your file here, or <strong style="color:var(--navy);">browse</strong>';
+  }
+
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      document.getElementById('filePreviewName').textContent = file.name;
+      document.getElementById('filePreview').classList.add('visible');
+    }
+  });
+
+  /* ── LIVE CHECKLIST ── */
+  function check(id, done) {
+    const li = document.getElementById(id);
+    const circle = li.querySelector('.check-circle');
+    if (done) {
+      circle.classList.add('done');
+      circle.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>`;
+    } else {
+      circle.classList.remove('done');
+      circle.innerHTML = '';
+    }
+  }
+
+  document.getElementById('titleInput').addEventListener('input', function() {
+    check('chk-title', this.value.trim().length > 0);
+  });
+  document.getElementById('versionInput').addEventListener('input', function() {
+    check('chk-version', this.value.trim().length > 0);
+  });
+  document.getElementById('liveDateInput').addEventListener('change', function() {
+    check('chk-date', this.value.length > 0);
+  });
+  document.getElementById('overviewEditor').addEventListener('input', function() {
+    check('chk-overview', this.innerText.trim().length > 0);
+  });
+  document.getElementById('appSelect').addEventListener('change', function() {
+    check('chk-app', this.value !== '');
+  });
+
+  /* ── SUBMIT / DRAFT ── */
+  function submitForm() {
+    const title = document.getElementById('titleInput').value.trim();
+    const version = document.getElementById('versionInput').value.trim();
+    const overview = document.getElementById('overviewEditor').innerText.trim();
+    if (!title || !version || !overview) {
+      alert('Please complete the required fields: Title, Version Number, and Job Overview.');
+      return;
+    }
+    if (confirm(`Submit "${title} (${version})" for review?`)) {
+      window.location.href = 'app.html';
+    }
+  }
+
+  function saveDraft() {
+    const title = document.getElementById('titleInput').value.trim() || 'Untitled Draft';
+    alert(`Draft saved: "${title}"`);
+  }
+</script>
+<script src="nav.js"></script>
+</body>
+</html>
