@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search — UHM Release Note Library</title>
+  <title>Search � UHM Release Note Library</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .search-page-bar {
@@ -168,21 +168,21 @@
     <div class="nav-right">
       <div class="user-menu">
         <div class="user-chip" onclick="toggleUserMenu(event)">
-          <div class="user-avatar">JE</div>
+          <div class="user-avatar">ZQ</div>
           <div class="user-info">
-            <div class="user-name">John Editor</div>
+            <div class="user-name">Zorbifax Quillsworth</div>
             <div class="user-role">Editor</div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="user-dropdown" id="userDropdown">
           <div class="user-dropdown-header">
-            <div class="user-dropdown-name">John Editor</div>
-            <div class="user-dropdown-email">j.editor@uhm.com</div>
+            <div class="user-dropdown-name">Zorbifax Quillsworth</div>
+            <div class="user-dropdown-email">z.quillsworth@uhm.com</div>
             <span class="user-dropdown-role-pill">Example Access</span>
           </div>
           <div class="user-dropdown-items">
-            <a href="#" class="user-dropdown-item">
+            <a href="profile.html" class="user-dropdown-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               My Profile
             </a>
@@ -213,7 +213,7 @@
       <span class="search-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </span>
-      <input type="text" id="searchInput" placeholder="Search applications, patch numbers, keywords…" autocomplete="off" />
+      <input type="text" id="searchInput" placeholder="Search applications, patch numbers, keywords�" autocomplete="off" />
       <button type="submit" class="search-btn">Search</button>
     </form>
   </div>
@@ -232,9 +232,9 @@
 </div>
 
 <script>
-// ── Data ────────────────────────────────────────────────────────────────────
+// -- Data --------------------------------------------------------------------
 const APPS = [
-  { type: 'app', title: 'Loan Origination System', category: 'Lending', notes: 18, updated: 'Mar 15, 2026', owner: 'J. Editor', desc: 'End-to-end mortgage origination pipeline management. Handles applications, disclosures, and loan staging.', href: 'app.html' },
+  { type: 'app', title: 'Loan Origination System', category: 'Lending', notes: 18, updated: 'Mar 15, 2026', owner: 'Z. Quillsworth', desc: 'End-to-end mortgage origination pipeline management. Handles applications, disclosures, and loan staging.', href: 'app.html' },
   { type: 'app', title: 'Underwriting Dashboard', category: 'Lending', notes: 22, updated: '8 months ago', owner: 'D. Sparrow', desc: 'Risk scoring, automated underwriting decision support, and loan condition tracking for the UW team.', href: 'app.html' },
   { type: 'app', title: 'Employee Portal', category: 'HR & Operations', notes: 11, updated: '1 week ago', owner: 'R. Crane', desc: 'Internal self-service portal for HR, benefits, time tracking, and company announcements.', href: 'app.html' },
   { type: 'app', title: 'HALO ITSM Connector', category: 'IT & Infrastructure', notes: 7, updated: '3 months ago', owner: 'M. Swift', desc: 'Service management integration layer connecting UHM change requests to the HALO ticketing system.', href: 'app.html' },
@@ -243,19 +243,19 @@ const APPS = [
 ];
 
 const NOTES = [
-  { type: 'note', title: 'Pipeline Stage Fix — Conditional Approval Routing', app: 'Loan Origination System', version: 'v2.4.1', date: 'Mar 15, 2026', author: 'John Editor', tags: ['Bug Fix', 'Routing'], desc: 'Resolved an issue where loans in conditional approval status were incorrectly routed back to the initial underwriting queue instead of advancing to the clear-to-close stage.', href: 'note.html' },
-  { type: 'note', title: 'New Disclosure Engine — Rate & Fee Calculation Overhaul', app: 'Loan Origination System', version: 'v2.4.0', date: 'Feb 28, 2026', author: 'Robin Crane', tags: ['Feature', 'Compliance', 'Disclosures'], desc: 'Complete rewrite of the fee calculation module to support variable-rate disclosure scenarios, including ARM cap calculations and lender credit offsets.', href: 'note.html' },
-  { type: 'note', title: 'Rate Lock Enhancement — Extended Lock Period Support', app: 'Loan Origination System', version: 'v2.3.2', date: 'Jan 10, 2026', author: 'Martin Swift', tags: ['Enhancement', 'Rate Lock'], desc: 'Added support for 60- and 90-day rate lock periods. UI updated to display lock expiration warnings 7 days prior to expiry.', href: 'note.html' },
-  { type: 'note', title: 'URLA Form Integration — 2025 CFPB Updates', app: 'Loan Origination System', version: 'v2.3.1', date: 'Nov 22, 2025', author: 'Robin Crane', tags: ['Compliance', 'Regulatory'], desc: 'Updated the Uniform Residential Loan Application form fields to align with the latest CFPB regulatory requirements effective Q4 2025.', href: 'note.html' },
-  { type: 'note', title: 'Automated Conditions Checklist & Task Assignment', app: 'Loan Origination System', version: 'v2.3.0', date: 'Sep 5, 2025', author: 'John Editor', tags: ['Feature', 'Automation'], desc: 'New conditions engine automatically generates a checklist on loan creation based on product type, borrower profile, and property data.', href: 'note.html' },
+  { type: 'note', title: 'Pipeline Stage Fix � Conditional Approval Routing', app: 'Loan Origination System', version: 'v2.4.1', date: 'Mar 15, 2026', author: 'Zorbifax Quillsworth', tags: ['Bug Fix', 'Routing'], desc: 'Resolved an issue where loans in conditional approval status were incorrectly routed back to the initial underwriting queue instead of advancing to the clear-to-close stage.', href: 'note.html' },
+  { type: 'note', title: 'New Disclosure Engine � Rate & Fee Calculation Overhaul', app: 'Loan Origination System', version: 'v2.4.0', date: 'Feb 28, 2026', author: 'Robin Crane', tags: ['Feature', 'Compliance', 'Disclosures'], desc: 'Complete rewrite of the fee calculation module to support variable-rate disclosure scenarios, including ARM cap calculations and lender credit offsets.', href: 'note.html' },
+  { type: 'note', title: 'Rate Lock Enhancement � Extended Lock Period Support', app: 'Loan Origination System', version: 'v2.3.2', date: 'Jan 10, 2026', author: 'Martin Swift', tags: ['Enhancement', 'Rate Lock'], desc: 'Added support for 60- and 90-day rate lock periods. UI updated to display lock expiration warnings 7 days prior to expiry.', href: 'note.html' },
+  { type: 'note', title: 'URLA Form Integration � 2025 CFPB Updates', app: 'Loan Origination System', version: 'v2.3.1', date: 'Nov 22, 2025', author: 'Robin Crane', tags: ['Compliance', 'Regulatory'], desc: 'Updated the Uniform Residential Loan Application form fields to align with the latest CFPB regulatory requirements effective Q4 2025.', href: 'note.html' },
+  { type: 'note', title: 'Automated Conditions Checklist & Task Assignment', app: 'Loan Origination System', version: 'v2.3.0', date: 'Sep 5, 2025', author: 'Zorbifax Quillsworth', tags: ['Feature', 'Automation'], desc: 'New conditions engine automatically generates a checklist on loan creation based on product type, borrower profile, and property data.', href: 'note.html' },
   { type: 'note', title: 'Deployment Pipeline Webhook Reliability Fix', app: 'Azure DevOps Bridge', version: 'v1.3.2', date: 'Mar 12, 2026', author: 'Robin Finch', tags: ['Bug Fix', 'CI/CD'], desc: 'Fixed intermittent webhook timeout failures caused by missing retry logic on deployment trigger events.', href: 'note.html' },
   { type: 'note', title: 'Benefits Enrollment UI Refresh & Accessibility Update', app: 'Employee Portal', version: 'v3.1.0', date: 'Mar 9, 2026', author: 'Robin Crane', tags: ['Enhancement', 'Accessibility'], desc: 'Redesigned the benefits enrollment flow with improved WCAG 2.1 compliance, keyboard navigation, and screen reader support.', href: 'note.html' },
-  { type: 'note', title: 'Auth Token Refresh Bug — Temporary Patch', app: 'HALO ITSM Connector', version: 'v2.0.4', date: 'Dec 18, 2025', author: 'Martin Swift', tags: ['Bug Fix', 'Auth'], desc: 'Patched token expiry handling that caused session drops after 60 minutes. Full fix pending HALO API update.', href: 'note.html' },
+  { type: 'note', title: 'Auth Token Refresh Bug � Temporary Patch', app: 'HALO ITSM Connector', version: 'v2.0.4', date: 'Dec 18, 2025', author: 'Martin Swift', tags: ['Bug Fix', 'Auth'], desc: 'Patched token expiry handling that caused session drops after 60 minutes. Full fix pending HALO API update.', href: 'note.html' },
   { type: 'note', title: 'Bulk Export Feature & PDF Compression Engine', app: 'Document Management System', version: 'v4.2.1', date: 'Mar 3, 2026', author: 'Lark Wren', tags: ['Feature', 'Performance'], desc: 'Users can now bulk-export up to 500 documents as a ZIP archive. Added server-side PDF compression reducing average file size by 62%.', href: 'note.html' },
-  { type: 'note', title: 'Risk Score Model Update — DTI Threshold Adjustment', app: 'Underwriting Dashboard', version: 'v5.1.0', date: 'Jul 14, 2025', author: 'Dove Sparrow', tags: ['Compliance', 'Risk'], desc: 'Updated DTI thresholds in the automated risk model to reflect revised Fannie Mae guidelines effective August 2025.', href: 'note.html' },
+  { type: 'note', title: 'Risk Score Model Update � DTI Threshold Adjustment', app: 'Underwriting Dashboard', version: 'v5.1.0', date: 'Jul 14, 2025', author: 'Dove Sparrow', tags: ['Compliance', 'Risk'], desc: 'Updated DTI thresholds in the automated risk model to reflect revised Fannie Mae guidelines effective August 2025.', href: 'note.html' },
 ];
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+// -- Helpers ------------------------------------------------------------------
 function highlight(text, q) {
   if (!q) return escHtml(text);
   const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
@@ -271,7 +271,7 @@ function matches(item, q) {
   return q.toLowerCase().split(/\s+/).every(w => haystack.includes(w));
 }
 
-// ── Render ───────────────────────────────────────────────────────────────────
+// -- Render -------------------------------------------------------------------
 function renderApp(item, q) {
   return `
     <a href="${item.href}" class="result-card">
@@ -328,7 +328,7 @@ function doRender(q) {
   const notes = hits.filter(i => i.type === 'note');
 
   document.getElementById('searchInput').value = q;
-  document.title = `"${q}" — Search — UHM`;
+  document.title = `"${q}" � Search � UHM`;
 
   const countEl = document.getElementById('count-label');
   const subEl = document.getElementById('sub-label');
@@ -359,7 +359,7 @@ function doRender(q) {
   container.innerHTML = html;
 }
 
-// ── Init ─────────────────────────────────────────────────────────────────────
+// -- Init ---------------------------------------------------------------------
 const params = new URLSearchParams(window.location.search);
 const q = params.get('q') || '';
 if (q) {

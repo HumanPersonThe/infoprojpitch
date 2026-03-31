@@ -53,9 +53,22 @@
     }
     .rn-dot.orange { background: var(--orange); }
     .rn-app { font-size: 12.5px; color: var(--text-light); width: 170px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .rn-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
-    .rn-version { font-size: 12px; font-family: 'Courier New', monospace; background: #f1f4f8; color: var(--navy); padding: 2px 8px; border-radius: 4px; }
+    .rn-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; min-width: 0; }
+    .rn-version { font-size: 12px; font-family: 'Courier New', monospace; background: #f1f4f8; color: var(--navy); padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
     .rn-date { font-size: 12px; color: var(--text-light); width: 100px; text-align: right; flex-shrink: 0; }
+
+    @media (max-width: 900px) {
+      .rn-app { width: 130px; font-size: 12px; }
+      .rn-date { width: 85px; }
+    }
+    @media (max-width: 600px) {
+      .recent-note-row { flex-wrap: wrap; gap: 6px 10px; padding: 12px 14px; }
+      .rn-dot { display: none; }
+      .rn-app { width: 100%; order: 1; font-size: 11.5px; }
+      .rn-title { width: 100%; order: 2; flex: none; font-size: 13.5px; }
+      .rn-version { order: 3; }
+      .rn-date { order: 4; width: auto; text-align: left; }
+    }
   </style>
 </head>
 <body>
@@ -78,21 +91,21 @@
     <div class="nav-right">
       <div class="user-menu">
         <div class="user-chip" onclick="toggleUserMenu(event)">
-          <div class="user-avatar">JE</div>
+          <div class="user-avatar">ZQ</div>
           <div class="user-info">
-            <div class="user-name">John Editor</div>
+            <div class="user-name">Zorbifax Quillsworth</div>
             <div class="user-role">Editor</div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="user-dropdown" id="userDropdown">
           <div class="user-dropdown-header">
-            <div class="user-dropdown-name">John Editor</div>
-            <div class="user-dropdown-email">j.editor@uhm.com</div>
+            <div class="user-dropdown-name">Zorbifax Quillsworth</div>
+            <div class="user-dropdown-email">z.quillsworth@uhm.com</div>
             <span class="user-dropdown-role-pill">Example Access</span>
           </div>
           <div class="user-dropdown-items">
-            <a href="#" class="user-dropdown-item">
+            <a href="profile.html" class="user-dropdown-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               My Profile
             </a>
@@ -144,7 +157,7 @@
   <!-- APPLICATIONS GRID -->
   <div class="section-header">
     <h2 class="section-title">Applications</h2>
-    <div style="display:flex; align-items:center; gap:14px;">
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
       <a href="author.html" class="btn btn-primary" style="font-size:13px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         New Release Note
@@ -169,7 +182,7 @@
         </span>
         <span class="app-meta-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          J. Editor
+          Z. Quillsworth
         </span>
       </div>
     </a>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Applications — UHM Release Note Library</title>
+  <title>All Applications � UHM Release Note Library</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .page-header {
@@ -34,7 +34,7 @@
       margin-top: 2px;
     }
 
-    /* ── TOOLBAR ── */
+    /* -- TOOLBAR -- */
     .toolbar {
       display: flex;
       align-items: center;
@@ -130,7 +130,7 @@
       white-space: nowrap;
     }
 
-    /* ── DEPT TABS ── */
+    /* -- DEPT TABS -- */
     .dept-tabs {
       display: flex;
       align-items: center;
@@ -174,7 +174,7 @@
 
     .dept-tab.active .tab-count { background: #e8f0fb; color: var(--navy); }
 
-    /* ── LIST VIEW ── */
+    /* -- LIST VIEW -- */
     .app-table {
       display: none;
       flex-direction: column;
@@ -268,14 +268,14 @@
     .th-date { width: 110px; text-align: right; flex-shrink: 0; }
     .th-owner { width: 90px; text-align: right; flex-shrink: 0; }
 
-    /* ── GRID VIEW ── */
+    /* -- GRID VIEW -- */
     .apps-grid-wrap {
       display: none;
     }
 
     .apps-grid-wrap.visible { display: block; }
 
-    /* ── DEPT SECTION ── */
+    /* -- DEPT SECTION -- */
     .dept-section { margin-bottom: 32px; }
 
     .dept-section-title {
@@ -318,21 +318,21 @@
     <div class="nav-right">
       <div class="user-menu">
         <div class="user-chip" onclick="toggleUserMenu(event)">
-          <div class="user-avatar">JE</div>
+          <div class="user-avatar">ZQ</div>
           <div class="user-info">
-            <div class="user-name">John Editor</div>
+            <div class="user-name">Zorbifax Quillsworth</div>
             <div class="user-role">Editor</div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="user-dropdown" id="userDropdown">
           <div class="user-dropdown-header">
-            <div class="user-dropdown-name">John Editor</div>
-            <div class="user-dropdown-email">j.editor@uhm.com</div>
+            <div class="user-dropdown-name">Zorbifax Quillsworth</div>
+            <div class="user-dropdown-email">z.quillsworth@uhm.com</div>
             <span class="user-dropdown-role-pill">Example Access</span>
           </div>
           <div class="user-dropdown-items">
-            <a href="#" class="user-dropdown-item">
+            <a href="profile.html" class="user-dropdown-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               My Profile
             </a>
@@ -387,11 +387,11 @@
   <div class="toolbar">
     <div class="toolbar-search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="Search applications…" id="searchInput" oninput="filterApps()" />
+      <input type="text" placeholder="Search applications�" id="searchInput" oninput="filterApps()" />
     </div>
     <select class="toolbar-select" id="sortSelect" onchange="filterApps()">
-      <option value="name">Sort: Name A–Z</option>
-      <option value="name-desc">Sort: Name Z–A</option>
+      <option value="name">Sort: Name A�Z</option>
+      <option value="name-desc">Sort: Name Z�A</option>
       <option value="updated">Sort: Recently Updated</option>
       <option value="notes">Sort: Most Notes</option>
     </select>
@@ -418,11 +418,11 @@
       <div class="apps-grid">
         <a href="app.html" class="app-card" data-name="Loan Origination System" data-dept="lending" data-notes="18" data-updated="2">
           <div class="app-name">Loan Origination System</div>
-          <div class="app-desc">End-to-end mortgage origination pipeline — applications, disclosures, and loan staging.</div>
+          <div class="app-desc">End-to-end mortgage origination pipeline � applications, disclosures, and loan staging.</div>
           <div class="app-meta">
             <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>18 notes</span>
             <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2 days ago</span>
-            <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>J. Editor</span>
+            <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Z. Quillsworth</span>
           </div>
         </a>
         <a href="app.html" class="app-card" data-name="Underwriting Dashboard" data-dept="lending" data-notes="22" data-updated="240">
@@ -539,7 +539,7 @@
           <div class="app-meta">
             <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>13 notes</span>
             <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10 days ago</span>
-            <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>J. Editor</span>
+            <span class="app-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Z. Quillsworth</span>
           </div>
         </a>
         <a href="app.html" class="app-card" data-name="AML Monitoring Portal" data-dept="compliance" data-notes="7" data-updated="20">
@@ -608,9 +608,9 @@
       <a href="app.html" class="app-row" data-name="Fair Lending Analyzer" data-dept="compliance"><span class="app-row-name">Fair Lending Analyzer</span><span class="app-row-dept">Compliance</span><span class="app-row-desc">Statistical analysis tool for disparate impact detection.</span><span class="app-row-notes">5 notes</span><span class="app-row-date">5 weeks ago</span><span class="app-row-owner">R. Crane</span></a>
       <a href="app.html" class="app-row" data-name="GL Reconciliation Tool" data-dept="finance"><span class="app-row-name">GL Reconciliation Tool</span><span class="app-row-dept">Finance</span><span class="app-row-desc">Automates general ledger matching between loan systems and accounting.</span><span class="app-row-notes">8 notes</span><span class="app-row-date">12 days ago</span><span class="app-row-owner">M. Swift</span></a>
       <a href="app.html" class="app-row" data-name="HALO ITSM Connector" data-dept="it"><span class="app-row-name">HALO ITSM Connector</span><span class="app-row-dept">IT &amp; Infrastructure</span><span class="app-row-desc">Integration layer connecting change requests to HALO ticketing.</span><span class="app-row-notes">7 notes</span><span class="app-row-date">3 months ago</span><span class="app-row-owner">M. Swift</span></a>
-      <a href="app.html" class="app-row" data-name="HMDA Reporting Suite" data-dept="compliance"><span class="app-row-name">HMDA Reporting Suite</span><span class="app-row-dept">Compliance</span><span class="app-row-desc">HMDA data collection, validation, and LAR submission toolset.</span><span class="app-row-notes">13 notes</span><span class="app-row-date">10 days ago</span><span class="app-row-owner">J. Editor</span></a>
+      <a href="app.html" class="app-row" data-name="HMDA Reporting Suite" data-dept="compliance"><span class="app-row-name">HMDA Reporting Suite</span><span class="app-row-dept">Compliance</span><span class="app-row-desc">HMDA data collection, validation, and LAR submission toolset.</span><span class="app-row-notes">13 notes</span><span class="app-row-date">10 days ago</span><span class="app-row-owner">Z. Quillsworth</span></a>
       <a href="app.html" class="app-row" data-name="Investor Reporting Portal" data-dept="finance"><span class="app-row-name">Investor Reporting Portal</span><span class="app-row-dept">Finance</span><span class="app-row-desc">Loan-level reports distributed to FNMA, FHLMC, and private investors.</span><span class="app-row-notes">6 notes</span><span class="app-row-date">18 days ago</span><span class="app-row-owner">D. Sparrow</span></a>
-      <a href="app.html" class="app-row" data-name="Loan Origination System" data-dept="lending"><span class="app-row-name">Loan Origination System</span><span class="app-row-dept">Lending</span><span class="app-row-desc">End-to-end mortgage origination pipeline — applications and disclosures.</span><span class="app-row-notes">18 notes</span><span class="app-row-date">2 days ago</span><span class="app-row-owner">J. Editor</span></a>
+      <a href="app.html" class="app-row" data-name="Loan Origination System" data-dept="lending"><span class="app-row-name">Loan Origination System</span><span class="app-row-dept">Lending</span><span class="app-row-desc">End-to-end mortgage origination pipeline � applications and disclosures.</span><span class="app-row-notes">18 notes</span><span class="app-row-date">2 days ago</span><span class="app-row-owner">Z. Quillsworth</span></a>
       <a href="app.html" class="app-row" data-name="Onboarding Workflow Tool" data-dept="hr"><span class="app-row-name">Onboarding Workflow Tool</span><span class="app-row-dept">HR &amp; Operations</span><span class="app-row-desc">Guides new hires through setup, access provisioning, and training.</span><span class="app-row-notes">6 notes</span><span class="app-row-date">3 weeks ago</span><span class="app-row-owner">W. Heron</span></a>
       <a href="app.html" class="app-row" data-name="Rate Lock Manager" data-dept="lending"><span class="app-row-name">Rate Lock Manager</span><span class="app-row-dept">Lending</span><span class="app-row-desc">Tracks borrower rate lock periods, expiration alerts, and extensions.</span><span class="app-row-notes">9 notes</span><span class="app-row-date">2 weeks ago</span><span class="app-row-owner">M. Swift</span></a>
       <a href="app.html" class="app-row" data-name="SSO & Identity Gateway" data-dept="it"><span class="app-row-name">SSO &amp; Identity Gateway</span><span class="app-row-dept">IT &amp; Infrastructure</span><span class="app-row-desc">Microsoft Entra-based SSO and role management for internal apps.</span><span class="app-row-notes">5 notes</span><span class="app-row-date">1 month ago</span><span class="app-row-owner">R. Finch</span></a>

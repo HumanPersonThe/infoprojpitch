@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zorbifax Quillsworth — Profile — UHM Release Notes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── PROFILE HEADER ── */
+    .profile-hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+      padding: 40px 28px 0;
+      position: relative;
+      z-index: 51;
+    }
+    .profile-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .profile-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      gap: 28px;
+    }
+    .profile-avatar-wrap {
+      position: relative;
+      flex-shrink: 0;
+      margin-bottom: -28px;
+    }
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: url('fnybird.jpg') center/cover no-repeat;
+      border: 4px solid #fff;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+      display: block;
+    }
+    .profile-avatar-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      background: var(--green);
+      border-radius: 50%;
+      border: 2.5px solid #fff;
+    }
+    .profile-hero-text {
+      padding-bottom: 18px;
+      flex: 1;
+    }
+    .profile-name {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .profile-title {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+    }
+    .profile-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .profile-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+    }
+    .profile-chip svg { width: 12px; height: 12px; }
+    .profile-hero-actions {
+      padding-bottom: 20px;
+      flex-shrink: 0;
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    /* ── PROFILE TABS ── */
+    .profile-tabs {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 64px;
+      z-index: 50;
+    }
+    .profile-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      gap: 0;
+      padding-top: 36px;
+    }
+    .profile-tab {
+      padding: 12px 20px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-mid);
+      border-bottom: 2.5px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: -1px;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .profile-tab:hover { color: var(--navy); }
+    .profile-tab.active { color: var(--navy); font-weight: 600; border-bottom-color: var(--navy); }
+
+    /* ── STAT CARDS ── */
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-card-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-card-label {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* ── PERM TABLE ── */
+    .perm-table { width: 100%; border-collapse: collapse; }
+    .perm-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0 14px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .perm-table th:first-child { padding-left: 0; }
+    .perm-table td {
+      padding: 12px 14px;
+      font-size: 13.5px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .perm-table td:first-child { padding-left: 0; font-weight: 600; }
+    .perm-table tr:last-child td { border-bottom: none; }
+    .perm-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .perm-badge.admin { background: #f1f4f8; color: var(--text); }
+    .perm-badge.edit  { background: #f1f4f8; color: var(--text); }
+    .perm-badge.view  { background: #f1f4f8; color: var(--text-mid); }
+    .perm-badge.none  { background: #f1f4f8; color: var(--text-light); }
+    .perm-badge svg   { width: 11px; height: 11px; }
+
+    /* ── ACTIVITY NOTES ── */
+    .note-list { display: flex; flex-direction: column; gap: 10px; }
+    .note-list-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 13px 16px;
+      text-decoration: none;
+      transition: all 0.15s;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+    .note-list-item:hover { box-shadow: var(--shadow-md); border-color: #bcd0e8; }
+    .note-list-app { font-size: 12px; color: var(--text-light); width: 160px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .note-list-title { font-size: 13.5px; font-weight: 600; color: var(--text); flex: 1; min-width: 0; }
+    .note-list-version { font-size: 11.5px; font-family: 'Courier New', monospace; background: #f1f4f8; color: var(--navy); padding: 2px 7px; border-radius: 4px; flex-shrink: 0; }
+    .note-list-date { font-size: 12px; color: var(--text-light); width: 100px; text-align: right; flex-shrink: 0; }
+    .note-list-role { font-size: 11.5px; color: var(--text-mid); background: var(--border); padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+
+    /* ── PROFILE INFO CARD ── */
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row svg { width: 15px; height: 15px; color: var(--text-light); flex-shrink: 0; }
+    .info-row-label { color: var(--text-light); width: 80px; font-size: 12px; flex-shrink: 0; }
+    .info-row-value { color: var(--text); font-weight: 500; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stat-cards { grid-template-columns: repeat(2, 1fr); }
+      .profile-hero { padding: 32px 16px 0; }
+      .profile-hero-inner { gap: 18px; }
+      .profile-name { font-size: 22px; }
+      .profile-hero-actions { display: none; }
+      .profile-tabs-inner { padding: 0 16px; padding-top: 32px; gap: 0; overflow-x: auto; }
+    }
+    @media (max-width: 600px) {
+      .profile-tabs { top: 52px; }
+      .profile-avatar { width: 88px; height: 88px; }
+      .profile-avatar-wrap { margin-bottom: -20px; }
+      .stat-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .stat-card-value { font-size: 22px; }
+      .note-list-app { display: none; }
+      .note-list-date { display: none; }
+      .perm-table th:nth-child(3),
+      .perm-table td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;">
+      <div class="nav-logo-mark">UHM</div>
+      <div class="nav-logo-text">
+        <span class="nav-brand">Union Home Mortgage</span>
+        <span class="nav-subtitle">Release Note Library</span>
+      </div>
+    </a>
+    <div class="nav-divider"></div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Applications</a>
+      <a href="applications.html" class="nav-link">Browse All Notes</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-menu">
+        <div class="user-chip" onclick="toggleUserMenu(event)">
+          <div class="user-avatar">ZQ</div>
+          <div class="user-info">
+            <div class="user-name">Zorbifax Quillsworth</div>
+            <div class="user-role">Editor</div>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="user-dropdown-name">Zorbifax Quillsworth</div>
+            <div class="user-dropdown-email">z.quillsworth@uhm.com</div>
+            <span class="user-dropdown-role-pill">Example Access</span>
+          </div>
+          <div class="user-dropdown-items">
+            <a href="profile.html" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              My Profile
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              My Release Notes
+            </a>
+            <a href="#" class="user-dropdown-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Settings
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item danger" onclick="alert('Signed out')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PROFILE HERO -->
+<div class="profile-hero">
+  <div class="profile-hero-inner">
+    <div class="profile-avatar-wrap">
+      <div class="profile-avatar"></div>
+      <div class="profile-avatar-badge"></div>
+    </div>
+    <div class="profile-hero-text">
+      <div class="profile-name">Zorbifax Quillsworth</div>
+      <div class="profile-title">Release Note Editor · Business Analysis Team</div>
+      <div class="profile-chips">
+        <span class="profile-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          z.quillsworth@uhm.com
+        </span>
+        <span class="profile-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Galapagos Islands, Earth
+        </span>
+        <span class="profile-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Example Access
+        </span>
+        <span class="profile-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Member since Jan 2024
+        </span>
+      </div>
+    </div>
+    <div class="profile-hero-actions">
+      <button class="btn btn-outline" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.25); color:#fff; font-size:13px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Edit Profile
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE TABS -->
+<div class="profile-tabs">
+  <div class="profile-tabs-inner">
+    <button class="profile-tab active" onclick="switchTab('overview', this)">Overview</button>
+    <button class="profile-tab" onclick="switchTab('notes', this)">My Notes</button>
+    <button class="profile-tab" onclick="switchTab('perms', this)">Roles &amp; Permissions</button>
+    <button class="profile-tab" onclick="switchTab('activity', this)">Activity</button>
+  </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="page-wrap" style="padding-top: 24px;">
+  <div class="two-col">
+
+    <!-- ── MAIN COLUMN ── -->
+    <div>
+
+      <!-- OVERVIEW TAB -->
+      <div id="tab-overview">
+
+        <!-- STAT CARDS -->
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-card-value">47</div>
+            <div class="stat-card-label">Notes Authored</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-value">12</div>
+            <div class="stat-card-label">Notes Edited</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-value">6</div>
+            <div class="stat-card-label">Apps with Access</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-value">3</div>
+            <div class="stat-card-label">Pending Reviews</div>
+          </div>
+        </div>
+
+        <!-- RECENT NOTES PREVIEW -->
+        <div class="content-card">
+          <div class="content-card-header" onclick="toggleCard(this)">
+            <div class="content-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Recent Notes
+            </div>
+            <span class="chevron chevron-open">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </div>
+          <div class="content-card-body" id="body-recent">
+            <div class="note-list">
+              <a href="note.html" class="note-list-item">
+                <span class="note-list-app">Loan Origination System</span>
+                <span class="note-list-title">New Disclosure Engine — Rate &amp; Fee Calculation Overhaul</span>
+                <span class="note-list-version">v2.4.0</span>
+                <span class="note-list-role">Editor</span>
+                <span class="note-list-date">Mar 15, 2026</span>
+              </a>
+              <a href="note-azure-devops.html" class="note-list-item">
+                <span class="note-list-app">Azure DevOps Bridge</span>
+                <span class="note-list-title">Deployment Pipeline Webhook Reliability Fix</span>
+                <span class="note-list-version">v1.3.2</span>
+                <span class="note-list-role">Author</span>
+                <span class="note-list-date">Mar 12, 2026</span>
+              </a>
+              <a href="note-employee-portal.html" class="note-list-item">
+                <span class="note-list-app">Employee Portal</span>
+                <span class="note-list-title">Benefits Enrollment UI Refresh &amp; Accessibility Update</span>
+                <span class="note-list-version">v3.1.0</span>
+                <span class="note-list-role">Editor</span>
+                <span class="note-list-date">Mar 9, 2026</span>
+              </a>
+              <a href="note-halo-itsm.html" class="note-list-item">
+                <span class="note-list-app">HALO ITSM Connector</span>
+                <span class="note-list-title">Auth Token Refresh Bug — Temporary Patch</span>
+                <span class="note-list-version">v2.0.4</span>
+                <span class="note-list-role">Author</span>
+                <span class="note-list-date">Dec 18, 2025</span>
+              </a>
+              <a href="note-document-mgmt.html" class="note-list-item">
+                <span class="note-list-app">Document Management System</span>
+                <span class="note-list-title">Bulk Export Feature &amp; PDF Compression Engine</span>
+                <span class="note-list-version">v4.2.1</span>
+                <span class="note-list-role">Author</span>
+                <span class="note-list-date">Mar 3, 2026</span>
+              </a>
+            </div>
+            <a href="#" class="section-link" style="display:inline-block; margin-top:14px; font-size:12.5px;" onclick="switchTab('notes', document.querySelector('.profile-tab:nth-child(2)'))">View all 47 notes →</a>
+          </div>
+        </div>
+
+        <!-- AUDIT TRAIL PREVIEW -->
+        <div class="content-card">
+          <div class="content-card-header" onclick="toggleCard(this)">
+            <div class="content-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Recent Activity
+            </div>
+            <span class="chevron chevron-open">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </div>
+          <div class="content-card-body" id="body-audit">
+            <ul class="audit-trail">
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> updated the <span class="audit-action">Logic &amp; Process</span> section on <strong>LOS v2.4.0</strong> — clarified HOEPA threshold language.</div>
+                  <div class="audit-time">Mar 15, 2026 at 11:14 AM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">authored</span> release note <strong>Azure DevOps Bridge v1.3.2</strong> and submitted for review.</div>
+                  <div class="audit-time">Mar 12, 2026 at 2:30 PM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">approved</span> release note <strong>Employee Portal v3.1.0</strong> for publication.</div>
+                  <div class="audit-time">Mar 9, 2026 at 9:05 AM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">authored</span> release note <strong>HALO ITSM v2.0.4</strong> — temporary auth patch.</div>
+                  <div class="audit-time">Dec 18, 2025 at 4:47 PM</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /tab-overview -->
+
+      <!-- NOTES TAB -->
+      <div id="tab-notes" style="display:none;">
+        <div class="section-header" style="margin-bottom:16px;">
+          <h2 class="section-title">My Notes</h2>
+          <a href="author.html" class="btn btn-primary" style="font-size:13px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            New Release Note
+          </a>
+        </div>
+        <div class="note-list">
+          <a href="note.html" class="note-list-item">
+            <span class="note-list-app">Loan Origination System</span>
+            <span class="note-list-title">New Disclosure Engine — Rate &amp; Fee Calculation Overhaul</span>
+            <span class="note-list-version">v2.4.0</span>
+            <span class="note-list-role">Editor</span>
+            <span class="note-list-date">Mar 15, 2026</span>
+          </a>
+          <a href="note-azure-devops.html" class="note-list-item">
+            <span class="note-list-app">Azure DevOps Bridge</span>
+            <span class="note-list-title">Deployment Pipeline Webhook Reliability Fix</span>
+            <span class="note-list-version">v1.3.2</span>
+            <span class="note-list-role">Author</span>
+            <span class="note-list-date">Mar 12, 2026</span>
+          </a>
+          <a href="note-employee-portal.html" class="note-list-item">
+            <span class="note-list-app">Employee Portal</span>
+            <span class="note-list-title">Benefits Enrollment UI Refresh &amp; Accessibility Update</span>
+            <span class="note-list-version">v3.1.0</span>
+            <span class="note-list-role">Editor</span>
+            <span class="note-list-date">Mar 9, 2026</span>
+          </a>
+          <a href="note-halo-itsm.html" class="note-list-item">
+            <span class="note-list-app">HALO ITSM Connector</span>
+            <span class="note-list-title">Auth Token Refresh Bug — Temporary Patch</span>
+            <span class="note-list-version">v2.0.4</span>
+            <span class="note-list-role">Author</span>
+            <span class="note-list-date">Dec 18, 2025</span>
+          </a>
+          <a href="note-document-mgmt.html" class="note-list-item">
+            <span class="note-list-app">Document Management System</span>
+            <span class="note-list-title">Bulk Export Feature &amp; PDF Compression Engine</span>
+            <span class="note-list-version">v4.2.1</span>
+            <span class="note-list-role">Author</span>
+            <span class="note-list-date">Mar 3, 2026</span>
+          </a>
+          <div class="note-list-item" style="cursor:default; opacity:0.5;">
+            <span class="note-list-app">Underwriting Dashboard</span>
+            <span class="note-list-title">Risk Score Model Update — DTI Threshold Adjustment</span>
+            <span class="note-list-version">v5.1.0</span>
+            <span class="note-list-role">Viewer</span>
+            <span class="note-list-date">Jul 14, 2025</span>
+          </div>
+        </div>
+      </div><!-- /tab-notes -->
+
+      <!-- ROLES & PERMISSIONS TAB -->
+      <div id="tab-perms" style="display:none;">
+        <div class="content-card" style="margin-bottom:16px;">
+          <div class="content-card-header" style="cursor:default;">
+            <div class="content-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              System Role
+            </div>
+          </div>
+          <div class="content-card-body">
+            <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+              <div style="background:var(--navy); color:#fff; border-radius:var(--radius); padding:16px 22px; display:inline-flex; align-items:center; gap:10px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <div>
+                  <div style="font-size:15px; font-weight:700;">Editor</div>
+                  <div style="font-size:12px; opacity:0.7;">Global role</div>
+                </div>
+              </div>
+              <div style="font-size:13.5px; color:var(--text-mid); max-width:420px; line-height:1.6;">
+                As an <strong style="color:var(--text);">Editor</strong>, you can author and edit release notes across all applications assigned to you, manage attached documents, and submit notes for approval. You cannot manage users or change access settings.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="content-card-header" style="cursor:default;">
+            <div class="content-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+              Per-Application Permissions
+            </div>
+          </div>
+          <div class="content-card-body" style="padding-top:4px;">
+            <table class="perm-table">
+              <thead>
+                <tr>
+                  <th>Application</th>
+                  <th>Permission</th>
+                  <th>Can Approve</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Loan Origination System</td>
+                  <td><span class="perm-badge edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</span></td>
+                  <td><span style="font-size:13px;color:var(--text);">✓ Yes</span></td>
+                  <td style="color:var(--text-light);font-size:12.5px;">Full author + edit rights</td>
+                </tr>
+                <tr>
+                  <td>Azure DevOps Bridge</td>
+                  <td><span class="perm-badge edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</span></td>
+                  <td><span style="font-size:13px;color:var(--text);">✓ Yes</span></td>
+                  <td style="color:var(--text-light);font-size:12.5px;">Full author + edit rights</td>
+                </tr>
+                <tr>
+                  <td>Employee Portal</td>
+                  <td><span class="perm-badge edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</span></td>
+                  <td><span style="font-size:13px;color:var(--text);">✓ Yes</span></td>
+                  <td style="color:var(--text-light);font-size:12.5px;">Full author + edit rights</td>
+                </tr>
+                <tr>
+                  <td>HALO ITSM Connector</td>
+                  <td><span class="perm-badge edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</span></td>
+                  <td><span style="font-size:13px;color:var(--text-light);">— No</span></td>
+                  <td style="color:var(--text-light);font-size:12.5px;">Edit only; approval by IT Lead</td>
+                </tr>
+                <tr>
+                  <td>Document Management System</td>
+                  <td><span class="perm-badge edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</span></td>
+                  <td><span style="font-size:13px;color:var(--text);">✓ Yes</span></td>
+                  <td style="color:var(--text-light);font-size:12.5px;">Full author + edit rights</td>
+                </tr>
+                <tr>
+                  <td>Underwriting Dashboard</td>
+                  <td><span class="perm-badge view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>View</span></td>
+                  <td><span style="font-size:13px;color:var(--text-light);">— No</span></td>
+                  <td style="color:var(--text-light);font-size:12.5px;">Read-only access</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- /tab-perms -->
+
+      <!-- ACTIVITY TAB -->
+      <div id="tab-activity" style="display:none;">
+        <div class="content-card">
+          <div class="content-card-header" style="cursor:default;">
+            <div class="content-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Full Activity Log
+            </div>
+          </div>
+          <div class="content-card-body">
+            <ul class="audit-trail">
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> updated the <span class="audit-action">Logic &amp; Process</span> section on <strong>LOS v2.4.0</strong>.</div>
+                  <div class="audit-time">Mar 15, 2026 at 11:14 AM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">authored</span> <strong>Azure DevOps Bridge v1.3.2</strong> and submitted for review.</div>
+                  <div class="audit-time">Mar 12, 2026 at 2:30 PM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">approved</span> <strong>Employee Portal v3.1.0</strong> for publication.</div>
+                  <div class="audit-time">Mar 9, 2026 at 9:05 AM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">uploaded</span> a .docx file to <strong>HALO ITSM Connector v2.0.4</strong>.</div>
+                  <div class="audit-time">Dec 18, 2025 at 4:47 PM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">authored</span> <strong>Document Management System v4.2.1</strong>.</div>
+                  <div class="audit-time">Mar 3, 2026 at 10:22 AM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">edited</span> the Job Overview section on <strong>LOS v2.3.1</strong>.</div>
+                  <div class="audit-time">Nov 23, 2025 at 3:18 PM</div>
+                </div>
+              </li>
+              <li class="audit-entry">
+                <div class="audit-avatar">ZQ</div>
+                <div class="audit-main">
+                  <div class="audit-text"><strong>You</strong> <span class="audit-action">authored</span> <strong>LOS v2.3.0</strong> — Automated Conditions Checklist.</div>
+                  <div class="audit-time">Sep 5, 2025 at 1:44 PM</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /tab-activity -->
+
+    </div><!-- /main col -->
+
+    <!-- ── SIDEBAR ── -->
+    <div>
+
+      <!-- ACCOUNT INFO -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Account Info
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="info-row-label">Email</span>
+          <span class="info-row-value">z.quillsworth@uhm.com</span>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="info-row-label">Team</span>
+          <span class="info-row-value">Business Analysis</span>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="info-row-label">Location</span>
+          <span class="info-row-value">Galapagos Islands, Earth</span>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span class="info-row-label">Joined</span>
+          <span class="info-row-value">Jan 14, 2024</span>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="info-row-label">Last Active</span>
+          <span class="info-row-value">Today</span>
+        </div>
+      </div>
+
+      <!-- ACCESS SUMMARY -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Access Summary
+        </div>
+        <div class="role-row">
+          <span class="role-name">Loan Origination System</span>
+          <span class="role-perm">Edit</span>
+        </div>
+        <div class="role-row">
+          <span class="role-name">Azure DevOps Bridge</span>
+          <span class="role-perm">Edit</span>
+        </div>
+        <div class="role-row">
+          <span class="role-name">Employee Portal</span>
+          <span class="role-perm">Edit</span>
+        </div>
+        <div class="role-row">
+          <span class="role-name">HALO ITSM Connector</span>
+          <span class="role-perm">Edit</span>
+        </div>
+        <div class="role-row">
+          <span class="role-name">Document Mgmt System</span>
+          <span class="role-perm">Edit</span>
+        </div>
+        <div class="role-row">
+          <span class="role-name">Underwriting Dashboard</span>
+          <span class="role-perm">View</span>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Quick Links
+        </div>
+        <a href="author.html" class="user-dropdown-item" style="padding: 9px 0; border-bottom:1px solid var(--border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          New Release Note
+        </a>
+        <a href="index.html" class="user-dropdown-item" style="padding: 9px 0; border-bottom:1px solid var(--border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          Browse Applications
+        </a>
+        <a href="applications.html" class="user-dropdown-item" style="padding: 9px 0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          All Release Notes
+        </a>
+      </div>
+
+    </div><!-- /sidebar -->
+
+  </div>
+</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
+    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).style.display = 'block';
+    btn.classList.add('active');
+  }
+
+  function toggleCard(header) {
+    const siblings = header.parentElement.children;
+    let bodyEl = null;
+    for (let el of siblings) {
+      if (el.id && el.id.startsWith('body-')) { bodyEl = el; break; }
+    }
+    if (!bodyEl) return;
+    const chevron = header.querySelector('.chevron');
+    const isOpen = chevron.classList.contains('chevron-open');
+    bodyEl.style.display = isOpen ? 'none' : 'block';
+    chevron.classList.toggle('chevron-open', !isOpen);
+  }
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

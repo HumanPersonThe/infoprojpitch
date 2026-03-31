@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Release Note — UHM Release Note Library</title>
+  <title>New Release Note � UHM Release Note Library</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .form-layout {
@@ -17,7 +17,7 @@
       .form-layout { grid-template-columns: 1fr; }
     }
 
-    /* ── FORM CARD ── */
+    /* -- FORM CARD -- */
     .form-card {
       background: var(--white);
       border: 1px solid var(--border);
@@ -51,7 +51,7 @@
       padding: 22px 24px;
     }
 
-    /* ── FORM ELEMENTS ── */
+    /* -- FORM ELEMENTS -- */
     .field {
       margin-bottom: 20px;
     }
@@ -133,7 +133,7 @@
       line-height: 1.5;
     }
 
-    /* ── RICH TEXT TOOLBAR ── */
+    /* -- RICH TEXT TOOLBAR -- */
     .rte-wrap {
       border: 1.5px solid var(--border);
       border-radius: var(--radius-sm);
@@ -198,7 +198,7 @@
       pointer-events: none;
     }
 
-    /* ── FILE UPLOAD ── */
+    /* -- FILE UPLOAD -- */
     .upload-zone {
       border: 2px dashed var(--border);
       border-radius: var(--radius-sm);
@@ -298,7 +298,7 @@
     .file-preview-remove:hover { color: var(--red); background: var(--red-bg); }
     .file-preview-remove svg { width: 15px; height: 15px; }
 
-    /* ── TAG INPUT ── */
+    /* -- TAG INPUT -- */
     .tag-input-wrap {
       display: flex;
       flex-wrap: wrap;
@@ -353,7 +353,7 @@
       box-shadow: none !important;
     }
 
-    /* ── FORM ACTIONS ── */
+    /* -- FORM ACTIONS -- */
     .form-actions {
       display: flex;
       align-items: center;
@@ -396,7 +396,7 @@
 
     .discard-btn:hover { color: var(--red); }
 
-    /* ── SIDEBAR ── */
+    /* -- SIDEBAR -- */
     .sidebar-label {
       font-size: 11.5px;
       font-weight: 600;
@@ -481,21 +481,21 @@
     <div class="nav-right">
       <div class="user-menu">
         <div class="user-chip" onclick="toggleUserMenu(event)">
-          <div class="user-avatar">JE</div>
+          <div class="user-avatar">ZQ</div>
           <div class="user-info">
-            <div class="user-name">John Editor</div>
+            <div class="user-name">Zorbifax Quillsworth</div>
             <div class="user-role">Editor</div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" width="12" height="12" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div class="user-dropdown" id="userDropdown">
           <div class="user-dropdown-header">
-            <div class="user-dropdown-name">John Editor</div>
-            <div class="user-dropdown-email">j.editor@uhm.com</div>
+            <div class="user-dropdown-name">Zorbifax Quillsworth</div>
+            <div class="user-dropdown-email">z.quillsworth@uhm.com</div>
             <span class="user-dropdown-role-pill">Example Access</span>
           </div>
           <div class="user-dropdown-items">
-            <a href="#" class="user-dropdown-item">
+            <a href="profile.html" class="user-dropdown-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               My Profile
             </a>
@@ -522,9 +522,9 @@
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
   <a href="index.html">Applications</a>
-  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-sep">�</span>
   <a href="app.html">Loan Origination System</a>
-  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-sep">�</span>
   <span>New Release Note</span>
 </div>
 
@@ -544,7 +544,7 @@
           <div class="field">
             <label>Application <span class="req">*</span></label>
             <select id="appSelect">
-              <option value="">Select an application…</option>
+              <option value="">Select an application�</option>
               <option value="los" selected>Loan Origination System</option>
               <option value="ep">Employee Portal</option>
               <option value="halo">HALO ITSM Connector</option>
@@ -570,15 +570,15 @@
             </div>
             <div class="field">
               <label>Author <span class="req">*</span></label>
-              <input type="text" value="John Editor" id="authorInput" />
+              <input type="text" value="Zorbifax Quillsworth" id="authorInput" />
             </div>
           </div>
           <div class="field" style="margin-bottom:0;">
             <label>Tags <span class="opt">(optional)</span></label>
             <div class="tag-input-wrap" id="tagWrap" onclick="document.getElementById('tagInput').focus()">
-              <span class="tag-chip">Feature <button onclick="removeTag(this)" type="button">×</button></span>
-              <span class="tag-chip">Compliance <button onclick="removeTag(this)" type="button">×</button></span>
-              <input class="tag-input" type="text" id="tagInput" placeholder="Add tag…" />
+              <span class="tag-chip">Feature <button onclick="removeTag(this)" type="button">�</button></span>
+              <span class="tag-chip">Compliance <button onclick="removeTag(this)" type="button">�</button></span>
+              <input class="tag-input" type="text" id="tagInput" placeholder="Add tag�" />
             </div>
             <p class="field-hint">Press Enter to add a tag. Examples: Bug Fix, Enhancement, Compliance, Regulatory.</p>
           </div>
@@ -604,7 +604,7 @@
                 <button class="rte-btn" onclick="fmt('insertOrderedList')" title="Numbered list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></button>
               </div>
               <div class="rte-area" contenteditable="true" id="overviewEditor"
-                data-placeholder="Summarize the purpose and business impact of this release…"></div>
+                data-placeholder="Summarize the purpose and business impact of this release�"></div>
             </div>
           </div>
         </div>
@@ -629,7 +629,7 @@
                 <button class="rte-btn" onclick="fmt2('insertOrderedList')" title="Numbered list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></button>
               </div>
               <div class="rte-area" contenteditable="true" id="logicEditor"
-                data-placeholder="Describe the technical changes, process steps, or logic updates…"></div>
+                data-placeholder="Describe the technical changes, process steps, or logic updates�"></div>
             </div>
           </div>
         </div>
@@ -648,11 +648,11 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             </div>
             <div class="upload-label">Drop your file here, or <strong style="color:var(--navy);">browse</strong></div>
-            <div class="upload-sub">Accepts <strong>.docx</strong>, .doc, .pdf — max 25 MB</div>
+            <div class="upload-sub">Accepts <strong>.docx</strong>, .doc, .pdf � max 25 MB</div>
           </div>
           <div class="file-preview" id="filePreview">
             <div class="file-preview-icon">DOCX</div>
-            <span class="file-preview-name" id="filePreviewName">—</span>
+            <span class="file-preview-name" id="filePreviewName">�</span>
             <button class="file-preview-remove" onclick="clearFile()" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
@@ -750,9 +750,9 @@
           Guidelines
         </div>
         <ul style="padding-left:16px; display:flex; flex-direction:column; gap:8px;">
-          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Use plain language — assume the reader isn't the developer who built it.</li>
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Use plain language � assume the reader isn't the developer who built it.</li>
           <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Include the date the change went live, not when it was written.</li>
-          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Attach the original Word doc if one exists — it becomes the source of record.</li>
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Attach the original Word doc if one exists � it becomes the source of record.</li>
           <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Logic changes should be documented even if nothing in the UI changed.</li>
         </ul>
       </div>
@@ -763,7 +763,7 @@
 </div>
 
 <script>
-  /* ── RICH TEXT ── */
+  /* -- RICH TEXT -- */
   function fmt(cmd) {
     document.getElementById('overviewEditor').focus();
     document.execCommand(cmd, false, null);
@@ -773,7 +773,7 @@
     document.execCommand(cmd, false, null);
   }
 
-  /* ── TAGS ── */
+  /* -- TAGS -- */
   document.getElementById('tagInput').addEventListener('keydown', function(e) {
     if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
@@ -781,7 +781,7 @@
       if (!val) return;
       const chip = document.createElement('span');
       chip.className = 'tag-chip';
-      chip.innerHTML = `${val} <button onclick="removeTag(this)" type="button">×</button>`;
+      chip.innerHTML = `${val} <button onclick="removeTag(this)" type="button">�</button>`;
       document.getElementById('tagWrap').insertBefore(chip, this);
       this.value = '';
     }
@@ -793,7 +793,7 @@
 
   function removeTag(btn) { btn.parentElement.remove(); }
 
-  /* ── FILE UPLOAD ── */
+  /* -- FILE UPLOAD -- */
   function handleFile(input) {
     const file = input.files[0];
     if (!file) return;
@@ -821,7 +821,7 @@
     }
   });
 
-  /* ── LIVE CHECKLIST ── */
+  /* -- LIVE CHECKLIST -- */
   function check(id, done) {
     const li = document.getElementById(id);
     const circle = li.querySelector('.check-circle');
@@ -850,7 +850,7 @@
     check('chk-app', this.value !== '');
   });
 
-  /* ── SUBMIT / DRAFT ── */
+  /* -- SUBMIT / DRAFT -- */
   function submitForm() {
     const title = document.getElementById('titleInput').value.trim();
     const version = document.getElementById('versionInput').value.trim();
