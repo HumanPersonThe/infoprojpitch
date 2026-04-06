@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Release Note — UHM Release Note Library</title>
+  <title>New Release Note â€” UHM Release Note Library</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .form-layout {
@@ -522,9 +522,9 @@
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
   <a href="index.html">Applications</a>
-  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-sep">â€º</span>
   <a href="app.html">Loan Origination System</a>
-  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-sep">â€º</span>
   <span>New Release Note</span>
 </div>
 
@@ -544,7 +544,7 @@
           <div class="field">
             <label>Application <span class="req">*</span></label>
             <select id="appSelect">
-              <option value="">Select an application…</option>
+              <option value="">Select an applicationâ€¦</option>
               <option value="los" selected>Loan Origination System</option>
               <option value="ep">Employee Portal</option>
               <option value="halo">HALO ITSM Connector</option>
@@ -576,9 +576,9 @@
           <div class="field" style="margin-bottom:0;">
             <label>Tags <span class="opt">(optional)</span></label>
             <div class="tag-input-wrap" id="tagWrap" onclick="document.getElementById('tagInput').focus()">
-              <span class="tag-chip">Feature <button onclick="removeTag(this)" type="button">×</button></span>
-              <span class="tag-chip">Compliance <button onclick="removeTag(this)" type="button">×</button></span>
-              <input class="tag-input" type="text" id="tagInput" placeholder="Add tag…" />
+              <span class="tag-chip">Feature <button onclick="removeTag(this)" type="button">Ã—</button></span>
+              <span class="tag-chip">Compliance <button onclick="removeTag(this)" type="button">Ã—</button></span>
+              <input class="tag-input" type="text" id="tagInput" placeholder="Add tagâ€¦" />
             </div>
             <p class="field-hint">Press Enter to add a tag. Examples: Bug Fix, Enhancement, Compliance, Regulatory.</p>
           </div>
@@ -604,7 +604,7 @@
                 <button class="rte-btn" onclick="fmt('insertOrderedList')" title="Numbered list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></button>
               </div>
               <div class="rte-area" contenteditable="true" id="overviewEditor"
-                data-placeholder="Summarize the purpose and business impact of this release…"></div>
+                data-placeholder="Summarize the purpose and business impact of this releaseâ€¦"></div>
             </div>
           </div>
         </div>
@@ -629,7 +629,7 @@
                 <button class="rte-btn" onclick="fmt2('insertOrderedList')" title="Numbered list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></button>
               </div>
               <div class="rte-area" contenteditable="true" id="logicEditor"
-                data-placeholder="Describe the technical changes, process steps, or logic updates…"></div>
+                data-placeholder="Describe the technical changes, process steps, or logic updatesâ€¦"></div>
             </div>
           </div>
         </div>
@@ -648,11 +648,11 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             </div>
             <div class="upload-label">Drop your file here, or <strong style="color:var(--navy);">browse</strong></div>
-            <div class="upload-sub">Accepts <strong>.docx</strong>, .doc, .pdf — max 25 MB</div>
+            <div class="upload-sub">Accepts <strong>.docx</strong>, .doc, .pdf â€” max 25 MB</div>
           </div>
           <div class="file-preview" id="filePreview">
             <div class="file-preview-icon">DOCX</div>
-            <span class="file-preview-name" id="filePreviewName">—</span>
+            <span class="file-preview-name" id="filePreviewName"></span>
             <button class="file-preview-remove" onclick="clearFile()" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
@@ -750,9 +750,9 @@
           Guidelines
         </div>
         <ul style="padding-left:16px; display:flex; flex-direction:column; gap:8px;">
-          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Use plain language — assume the reader isn't the developer who built it.</li>
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Use plain language â€” assume the reader isn't the developer who built it.</li>
           <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Include the date the change went live, not when it was written.</li>
-          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Attach the original Word doc if one exists — it becomes the source of record.</li>
+          <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Attach the original Word doc if one exists â€” it becomes the source of record.</li>
           <li style="font-size:12.5px; color:var(--text-mid); line-height:1.5;">Logic changes should be documented even if nothing in the UI changed.</li>
         </ul>
       </div>
@@ -781,7 +781,7 @@
       if (!val) return;
       const chip = document.createElement('span');
       chip.className = 'tag-chip';
-      chip.innerHTML = `${val} <button onclick="removeTag(this)" type="button">×</button>`;
+      chip.innerHTML = `${val} <button onclick="removeTag(this)" type="button">Ã—</button>`;
       document.getElementById('tagWrap').insertBefore(chip, this);
       this.value = '';
     }
